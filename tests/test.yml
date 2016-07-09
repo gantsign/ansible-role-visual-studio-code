@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - visual-studio-code
+    - ansible-role-visual-studio-code
