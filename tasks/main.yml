@@ -1,2 +1,32 @@
 ---
-# tasks file for visual-studio-code
+- name: load version vars
+  with_first_found:
+    - ../vars/versions/{{ visual_studio_code_version }}.yml
+    - ../vars/versions/default.yml
+  include_vars: "{{ item }}"
+
+- name: assert version vars
+  assert:
+    that:
+      - visual_studio_code_redis_sha256sum not in (None, "")
+      - visual_studio_code_redis_url not in (None, "")
+
+- name: create local Ansible data directory
+  file:
+    state: directory
+    mode: '0755'
+    dest: "{{ local_ansible_data_path }}"
+
+- name: download Visual Studio Code
+  get_url:
+    url: "{{ visual_studio_code_redis_url }}"
+    dest: "{{ local_ansible_data_path }}/{{ visual_studio_code_redis_filename }}"
+    sha256sum: "{{ visual_studio_code_redis_sha256sum }}"
+    force: false
+    use_proxy: true
+    validate_certs: true
+    mode: '0644'
+
+- name: install Visual Studio Code
+  apt:
+    deb: "{{ local_ansible_data_path }}/{{ visual_studio_code_redis_filename }}"
