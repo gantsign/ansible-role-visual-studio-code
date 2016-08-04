@@ -18,7 +18,7 @@ are shown below):
 
 ```yaml
 # Visual Studio Code version number
-visual_studio_code_version: '1.3.1'
+visual_studio_code_version: '1.4'
 
 # Path for Ansible to store downloaded files
 local_ansible_data_path: '/tmp/ansible/data'
