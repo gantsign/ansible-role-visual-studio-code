@@ -31,7 +31,7 @@ script:
   # Run the playbook with ansible-playbook
   - ansible-playbook tests/test.yml -i tests/inventory
 
-  # Check LightDM installed
+  # Check Visual Studio Code installed
   - code --version
 
 notifications:
