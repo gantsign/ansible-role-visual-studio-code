@@ -28,5 +28,6 @@
     mode: 'u=rw,go=r'
 
 - name: install Visual Studio Code
+  become: yes
   apt:
     deb: "{{ local_ansible_data_path }}/{{ visual_studio_code_redis_filename }}"
