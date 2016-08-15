@@ -14,7 +14,7 @@
 - name: create local Ansible data directory
   file:
     state: directory
-    mode: '0755'
+    mode: 'u=rwx,go=rx'
     dest: "{{ local_ansible_data_path }}"
 
 - name: download Visual Studio Code
@@ -25,7 +25,7 @@
     force: false
     use_proxy: true
     validate_certs: true
-    mode: '0644'
+    mode: 'u=rw,go=r'
 
 - name: install Visual Studio Code
   apt:
