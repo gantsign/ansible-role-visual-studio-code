@@ -1,4 +1,4 @@
-# Created by https://www.gitignore.io/api/windows,linux,osx,vim,emacs,intellij,eclipse
+# Created by https://www.gitignore.io/api/windows,linux,osx,vim,emacs,intellij,eclipse,visualstudiocode,ansible
 
 ### Windows ###
 # Windows image file caches
@@ -35,7 +35,7 @@ $RECYCLE.BIN/
 
 
 ### OSX ###
-.DS_Store
+*.DS_Store
 .AppleDouble
 .LSOverride
 
@@ -53,6 +53,7 @@ Icon
 .TemporaryItems
 .Trashes
 .VolumeIcon.icns
+.com.apple.timemachine.donotpresent
 
 # Directories potentially created on remote AFP share
 .AppleDB
@@ -166,7 +167,12 @@ crashlytics-build.properties
 fabric.properties
 
 ### Intellij Patch ###
-*.iml
+# Comment Reason: https://github.com/joeblau/gitignore.io/issues/186#issuecomment-215987721
+
+# *.iml
+# modules.xml
+# .idea/misc.xml 
+# *.ipr
 
 
 ### Eclipse ###
@@ -221,3 +227,14 @@ local.properties
 
 # Code Recommenders
 .recommenders/
+
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+
+### Ansible ###
+*.retry
