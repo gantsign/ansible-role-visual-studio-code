@@ -1,5 +1,5 @@
 ---
-- hosts: localhost
+- hosts: all
   remote_user: root
   roles:
     - ansible-role-visual-studio-code

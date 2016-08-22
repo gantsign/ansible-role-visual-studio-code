@@ -17,6 +17,12 @@
     mode: 'u=rwx,go=rx'
     dest: "{{ local_ansible_data_path }}"
 
+- name: ensure ca-certificates installed
+  become: yes
+  apt:
+    name: ca-certificates
+    state: present
+
 - name: download Visual Studio Code
   get_url:
     url: "{{ visual_studio_code_redis_url }}"
