@@ -2,5 +2,5 @@
 # Visual Studio Code version number
 visual_studio_code_version: '1.4'
 
-# Path for Ansible to store downloaded files
-local_ansible_data_path: '/tmp/ansible/data'
+# Directory to store files downloaded for Visual Studio Code installation
+visual_studio_code_download_dir: "{{ x_ansible_download_dir | default('/tmp/ansible/data') }}"

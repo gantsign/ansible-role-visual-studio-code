@@ -20,8 +20,8 @@ are shown below):
 # Visual Studio Code version number
 visual_studio_code_version: '1.4'
 
-# Path for Ansible to store downloaded files
-local_ansible_data_path: '/tmp/ansible/data'
+# Directory to store files downloaded for Visual Studio Code installation
+visual_studio_code_download_dir: "{{ x_ansible_download_dir | default('/tmp/ansible/data') }}"
 
 # SHA256 sum for the redistributable package
 visual_studio_code_redis_sha256sum: 53eb2cd235b395a28e7fda6f50f904fd5665877e354609f836a6b60a1592c9c9
