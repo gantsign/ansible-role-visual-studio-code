@@ -11,11 +11,11 @@
       - "visual_studio_code_redis_sha256sum not in (None, '')"
       - "visual_studio_code_redis_url not in (None, '')"
 
-- name: create local Ansible data directory
+- name: create download directory
   file:
     state: directory
     mode: 'u=rwx,go=rx'
-    dest: "{{ local_ansible_data_path }}"
+    dest: "{{ visual_studio_code_download_dir }}"
 
 - name: ensure ca-certificates installed
   become: yes
@@ -26,7 +26,7 @@
 - name: download Visual Studio Code
   get_url:
     url: "{{ visual_studio_code_redis_url }}"
-    dest: "{{ local_ansible_data_path }}/{{ visual_studio_code_redis_filename }}"
+    dest: "{{ visual_studio_code_download_dir }}/{{ visual_studio_code_redis_filename }}"
     sha256sum: "{{ visual_studio_code_redis_sha256sum }}"
     force: false
     use_proxy: true
@@ -36,4 +36,4 @@
 - name: install Visual Studio Code
   become: yes
   apt:
-    deb: "{{ local_ansible_data_path }}/{{ visual_studio_code_redis_filename }}"
+    deb: "{{ visual_studio_code_download_dir }}/{{ visual_studio_code_redis_filename }}"
