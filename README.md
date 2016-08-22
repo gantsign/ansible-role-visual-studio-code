@@ -22,11 +22,31 @@ visual_studio_code_version: '1.4'
 
 # Directory to store files downloaded for Visual Studio Code installation
 visual_studio_code_download_dir: "{{ x_ansible_download_dir | default('~/.ansible/tmp/downloads') }}"
+```
 
-# SHA256 sum for the redistributable package
+### Supported Visual Studio Code versions
+
+The following versions of Visual Studio Code are supported without any
+additional configuration (for other versions follow the Advanced Configuration
+instructions):
+
+* `1.3`
+* `1.3.1`
+* `1.4`
+
+Advanced Configuration
+----------------------
+
+The following role variables are dependent on the Visual Studio Code version;
+to use a Visual Studio Code version **not pre-configured by this role** you
+must configure the variables below:
+
+```yaml
+# SHA256 sum for the redistributable package (e.g code_1.3.0-1467909982_amd64.deb)
 visual_studio_code_redis_sha256sum: 53eb2cd235b395a28e7fda6f50f904fd5665877e354609f836a6b60a1592c9c9
 
 # The download URL for the redistributable package
+# Permanent download URLs can be found on https://code.visualstudio.com/Updates 
 visual_studio_code_redis_url: https://az764295.vo.msecnd.net/stable/e724f269ded347b49fcf1657fc576399354e6703/code_1.3.0-1467909982_amd64.deb
 ```
 
