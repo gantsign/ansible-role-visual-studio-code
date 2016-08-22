@@ -238,3 +238,12 @@ local.properties
 
 ### Ansible ###
 *.retry
+
+####################
+### Custom rules ###
+####################
+
+### Molecule ### 
+
+.cache
+.molecule
