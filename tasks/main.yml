@@ -28,9 +28,9 @@
     url: "{{ visual_studio_code_redis_url }}"
     dest: "{{ visual_studio_code_download_dir }}/{{ visual_studio_code_redis_filename }}"
     sha256sum: "{{ visual_studio_code_redis_sha256sum }}"
-    force: false
-    use_proxy: true
-    validate_certs: true
+    force: no
+    use_proxy: yes
+    validate_certs: yes
     mode: 'u=rw,go=r'
 
 - name: install Visual Studio Code
