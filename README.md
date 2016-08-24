@@ -2,6 +2,7 @@ Ansible Role: Visual Studio Code
 ================================
 
 [![Build Status](https://travis-ci.org/gantsign/ansible-role-visual-studio-code.svg?branch=master)](https://travis-ci.org/gantsign/ansible-role-visual-studio-code)
+[![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-gantsign.visual--studio--code-blue.svg)](https://galaxy.ansible.com/gantsign/visual-studio-code)
 
 Role to install the [Visual Studio Code](https://code.visualstudio.com) IDE / text editor.
 
