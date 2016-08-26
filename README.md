@@ -25,7 +25,7 @@ visual_studio_code_version: '1.4'
 visual_studio_code_download_dir: "{{ x_ansible_download_dir | default('~/.ansible/tmp/downloads') }}"
 ```
 
-### Supported Visual Studio Code versions
+### Supported Visual Studio Code Versions
 
 The following versions of Visual Studio Code are supported without any
 additional configuration (for other versions follow the Advanced Configuration
@@ -60,7 +60,7 @@ Example Playbook
      - { role: gantsign.visual-studio-code }
 ```
 
-More roles from GantSign
+More Roles From GantSign
 ------------------------
 
 You can find more roles from GantSign on [Ansible Galaxy](https://galaxy.ansible.com/gantsign).
