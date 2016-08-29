@@ -1,0 +1,22 @@
+---
+- name: create settings directory
+  become: yes
+  file:
+    path: '~{{ item.username }}/.config/Code/User'
+    state: directory
+    owner: '{{ item.username }}'
+    group: '{{ item.username }}'
+    mode: 'u=rwx,go='
+  with_items: '{{ users }}'
+
+- name: write settings
+  become: yes
+  template:
+    src: settings.json.j2
+    dest: '~{{ item.username }}/.config/Code/User/settings.json'
+    force: no
+    owner: '{{ item.username }}'
+    group: '{{ item.username }}'
+    mode: 'u=rw,go='
+  with_items: '{{ users }}'
+  when: "item.visual_studio_code_settings is defined and item.visual_studio_code_settings not in ({}, '', None, omit)"
