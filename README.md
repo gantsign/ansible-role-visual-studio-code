@@ -48,7 +48,7 @@ must configure the variables below:
 visual_studio_code_redis_sha256sum: '53eb2cd235b395a28e7fda6f50f904fd5665877e354609f836a6b60a1592c9c9'
 
 # The download URL for the redistributable package
-# Permanent download URLs can be found on https://code.visualstudio.com/Updates 
+# Permanent download URLs can be found on https://code.visualstudio.com/Updates
 visual_studio_code_redis_url: 'https://az764295.vo.msecnd.net/stable/e724f269ded347b49fcf1657fc576399354e6703/code_1.3.0-1467909982_amd64.deb'
 ```
 
@@ -58,7 +58,7 @@ Example Playbook
 ```yaml
 - hosts: servers
   roles:
-     - { role: gantsign.visual-studio-code }
+     - role: gantsign.visual-studio-code
 ```
 
 More Roles From GantSign
