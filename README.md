@@ -37,6 +37,7 @@ users:
     visual_studio_code_extensions:
       - # extension 1
       - # extension 2
+    visual_studio_code_settings: # JSON object 
 ```
 
 ### Supported Visual Studio Code Versions
@@ -88,6 +89,13 @@ Playbook with extensions installed:
             - streetsidesoftware.code-spell-checker
             - wholroyd.jinja
             - donjayamanne.python
+          visual_studio_code_settings: { 
+            "editor.rulers": [80, 100, 120],
+            "editor.renderWhitespace": true,
+            "files.associations": {
+              "Vagrantfile": "ruby"
+            }
+          }
 ```
 
 More Roles From GantSign
