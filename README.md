@@ -24,6 +24,19 @@ visual_studio_code_version: '1.4'
 
 # Directory to store files downloaded for Visual Studio Code installation
 visual_studio_code_download_dir: "{{ x_ansible_download_dir | default('~/.ansible/tmp/downloads') }}"
+
+# Users to install extensions for
+users: []
+```
+
+Users are configured as follows:
+
+```yaml
+users:
+  - username: # Unix user name
+    visual_studio_code_extensions:
+      - # extension 1
+      - # extension 2
 ```
 
 ### Supported Visual Studio Code Versions
@@ -52,13 +65,29 @@ visual_studio_code_redis_sha256sum: '53eb2cd235b395a28e7fda6f50f904fd5665877e354
 visual_studio_code_redis_url: 'https://az764295.vo.msecnd.net/stable/e724f269ded347b49fcf1657fc576399354e6703/code_1.3.0-1467909982_amd64.deb'
 ```
 
-Example Playbook
-----------------
+Example Playbooks
+-----------------
+
+Minimal playbook:
 
 ```yaml
 - hosts: servers
   roles:
-     - role: gantsign.visual-studio-code
+    - role: gantsign.visual-studio-code
+```
+
+Playbook with extensions installed:
+
+```yaml
+- hosts: servers
+  roles:
+    - role: gantsign.visual-studio-code
+      users:
+        - username: vagrant
+          visual_studio_code_extensions:
+            - streetsidesoftware.code-spell-checker
+            - wholroyd.jinja
+            - donjayamanne.python
 ```
 
 More Roles From GantSign
