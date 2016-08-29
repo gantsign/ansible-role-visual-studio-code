@@ -1,5 +1,22 @@
 ---
 - hosts: all
   remote_user: root
+
+  pre_tasks:
+    - name: create test_usr
+      become: yes
+      user:
+        name: test_usr
+        state: present
+        home: /home/test_usr
+        createhome: yes
+
   roles:
-    - ansible-role-visual-studio-code
+    - role: ansible-role-visual-studio-code
+      users:
+        - username: test_usr
+          visual_studio_code_extensions:
+            - donjayamanne.python
+        - username: test_usr2
+          visual_studio_code_extensions: []
+        - username: test_usr3
