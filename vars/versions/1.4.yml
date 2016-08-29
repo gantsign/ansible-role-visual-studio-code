@@ -1,6 +1,6 @@
 ---
 # SHA256 sum for the redistributable package
-visual_studio_code_redis_sha256sum: fd798ead3403560f684ec26548ff50b04770e0dc8a7905d3d5f19f0bc05c6523
+visual_studio_code_redis_sha256sum: 'fd798ead3403560f684ec26548ff50b04770e0dc8a7905d3d5f19f0bc05c6523'
 
 # The download URL for the redistributable package
-visual_studio_code_redis_url: https://az764295.vo.msecnd.net/stable/6276dcb0ae497766056b4c09ea75be1d76a8b679/code_1.4.0-1470329130_amd64.deb
+visual_studio_code_redis_url: 'https://az764295.vo.msecnd.net/stable/6276dcb0ae497766056b4c09ea75be1d76a8b679/code_1.4.0-1470329130_amd64.deb'
