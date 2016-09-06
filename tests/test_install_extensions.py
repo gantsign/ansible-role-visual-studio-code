@@ -10,4 +10,6 @@ testinfra_hosts = AnsibleRunner('.molecule/ansible_inventory').get_hosts('all')
     ('wholroyd.jinja')
 ])
 def test_visual_studio_code(Command, extension):
-    assert 'already installed' in Command.check_output('sudo --user test_usr -H code --install-extension ' + extension)
+    output = Command.check_output('sudo --user test_usr -H code %s %s',
+                                  '--install-extension', extension)
+    assert 'already installed' in output
