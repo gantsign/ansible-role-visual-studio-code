@@ -20,7 +20,7 @@ are shown below):
 
 ```yaml
 # Visual Studio Code version number
-visual_studio_code_version: '1.4'
+visual_studio_code_version: '1.5'
 
 # Directory to store files downloaded for Visual Studio Code installation
 visual_studio_code_download_dir: "{{ x_ansible_download_dir | default('~/.ansible/tmp/downloads') }}"
@@ -37,7 +37,7 @@ users:
     visual_studio_code_extensions:
       - # extension 1
       - # extension 2
-    visual_studio_code_settings: # JSON object 
+    visual_studio_code_settings: # JSON object
 ```
 
 ### Supported Visual Studio Code Versions
@@ -49,6 +49,7 @@ instructions):
 * `1.3`
 * `1.3.1`
 * `1.4`
+* `1.5`
 
 Advanced Configuration
 ----------------------
@@ -89,7 +90,7 @@ Playbook with extensions installed:
             - streetsidesoftware.code-spell-checker
             - wholroyd.jinja
             - donjayamanne.python
-          visual_studio_code_settings: { 
+          visual_studio_code_settings: {
             "editor.rulers": [80, 100, 120],
             "editor.renderWhitespace": true,
             "files.associations": {
