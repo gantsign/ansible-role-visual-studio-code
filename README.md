@@ -10,6 +10,7 @@ Role to install the [Visual Studio Code](https://code.visualstudio.com) IDE / te
 Requirements
 ------------
 
+* Ansible >= 2.0
 * Ubuntu
 
 Role Variables
