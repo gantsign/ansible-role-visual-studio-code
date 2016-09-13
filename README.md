@@ -23,7 +23,7 @@ are shown below):
 visual_studio_code_version: '1.5.2'
 
 # Directory to store files downloaded for Visual Studio Code installation
-visual_studio_code_download_dir: "{{ x_ansible_download_dir | default('~/.ansible/tmp/downloads') }}"
+visual_studio_code_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
 
 # Users to install extensions for and/or write settings.json
 users: []
