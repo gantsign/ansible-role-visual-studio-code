@@ -7,6 +7,7 @@
     - gconf2
     - libasound2
     - libgtk2.0-0
+    - libxss1
 
 - name: create config directories for users
   become: yes
