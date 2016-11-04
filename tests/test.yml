@@ -3,27 +3,17 @@
   remote_user: root
 
   pre_tasks:
-    - name: create test_usr
+    - name: create test users
       become: yes
       user:
-        name: test_usr
+        name: '{{ item }}'
         state: present
-        home: /home/test_usr
+        home: '/home/{{ item }}'
         createhome: yes
-    - name: create test_usr2
-      become: yes
-      user:
-        name: test_usr2
-        state: present
-        home: /home/test_usr2
-        createhome: yes
-    - name: create test_usr3
-      become: yes
-      user:
-        name: test_usr3
-        state: present
-        home: /home/test_usr3
-        createhome: yes
+      with_items:
+        - test_usr
+        - test_usr2
+        - test_usr3
 
   roles:
     - role: ansible-role-visual-studio-code
