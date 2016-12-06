@@ -41,5 +41,9 @@ install:
 script:
   - molecule test
 
+branches:
+  only:
+    - master
+
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
