@@ -21,7 +21,7 @@ are shown below):
 
 ```yaml
 # Visual Studio Code version number
-visual_studio_code_version: '1.9.1'
+visual_studio_code_version: '1.10'
 
 # Directory to store files downloaded for Visual Studio Code installation
 visual_studio_code_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
@@ -63,6 +63,7 @@ instructions):
 * `1.8.1`
 * `1.9`
 * `1.9.1`
+* `1.10`
 
 Advanced Configuration
 ----------------------
