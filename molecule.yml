@@ -2,8 +2,17 @@
 ansible:
   playbook: tests/test.yml
 
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
 docker:
   containers:
   - name: ansible-role-visual-studio-code-01
     image: ubuntu
     image_version: '16.04'
+
+verifier:
+  name: testinfra
