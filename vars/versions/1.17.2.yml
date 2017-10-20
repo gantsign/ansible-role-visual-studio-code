@@ -1,0 +1,6 @@
+---
+# SHA256 sum for the redistributable package
+visual_studio_code_redis_sha256sum: '2af35701dbfb6b0c20bce7cece5018ad29197024f969b68d74f07bdccb88982f'
+
+# The download URL for the redistributable package
+visual_studio_code_redis_url: 'https://vscode-update.azurewebsites.net/1.17.2/linux-deb-x64/stable'
