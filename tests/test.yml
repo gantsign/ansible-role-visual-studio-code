@@ -20,7 +20,7 @@
       users:
         - username: test_usr
           visual_studio_code_extensions:
-            - donjayamanne.python
+            - ms-python.python
             - wholroyd.jinja
           visual_studio_code_settings: {
             "editor.rulers": [80, 100, 120],
