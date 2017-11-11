@@ -1,5 +1,6 @@
 ---
 - name: install extension cli dependencies
+  become: yes
   apt:
     name: "{{ item }}"
     state: present
