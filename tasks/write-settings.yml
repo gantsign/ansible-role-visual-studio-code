@@ -1,7 +1,7 @@
 ---
 - name: create settings directory
   become: yes
-  become_user: "{{ item.username }}"
+  become_user: '{{ item.username }}'
   file:
     path: '~{{ item.username }}/.config/Code/User'
     state: directory
@@ -10,7 +10,7 @@
 
 - name: write settings
   become: yes
-  become_user: "{{ item.username }}"
+  become_user: '{{ item.username }}'
   template:
     src: settings.json.j2
     dest: '~{{ item.username }}/.config/Code/User/settings.json'
