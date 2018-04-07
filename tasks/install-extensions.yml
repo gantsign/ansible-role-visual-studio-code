@@ -12,11 +12,10 @@
 
 - name: create config directories for users
   become: yes
+  become_user: "{{ item.0.username }}"
   file:
     path: "~{{ item.0.username }}/.config"
     state: directory
-    owner: "{{ item.0.username }}"
-    group: "{{ item.0.username }}"
     mode: 'u=rwx,go=r'
   with_subelements:
     - "{{ users }}"
@@ -25,11 +24,10 @@
 
 - name: create Visual Studio Code directories for users
   become: yes
+  become_user: "{{ item.0.username }}"
   file:
     path: "~{{ item.0.username }}/.config/Code/User"
     state: directory
-    owner: "{{ item.0.username }}"
-    group: "{{ item.0.username }}"
     mode: 'u=rwx,go='
   with_subelements:
     - "{{ users }}"
