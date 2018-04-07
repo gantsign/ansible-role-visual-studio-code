@@ -2,7 +2,7 @@
 - name: install extension cli dependencies
   become: yes
   apt:
-    name: "{{ item }}"
+    name: '{{ item }}'
     state: present
   with_items:
     - gconf2
@@ -12,34 +12,34 @@
 
 - name: create config directories for users
   become: yes
-  become_user: "{{ item.0.username }}"
+  become_user: '{{ item.0.username }}'
   file:
-    path: "~{{ item.0.username }}/.config"
+    path: '~{{ item.0.username }}/.config'
     state: directory
     mode: 'u=rwx,go=r'
   with_subelements:
-    - "{{ users }}"
+    - '{{ users }}'
     - visual_studio_code_extensions
     - skip_missing: yes
 
 - name: create Visual Studio Code directories for users
   become: yes
-  become_user: "{{ item.0.username }}"
+  become_user: '{{ item.0.username }}'
   file:
-    path: "~{{ item.0.username }}/.config/Code/User"
+    path: '~{{ item.0.username }}/.config/Code/User'
     state: directory
     mode: 'u=rwx,go='
   with_subelements:
-    - "{{ users }}"
+    - '{{ users }}'
     - visual_studio_code_extensions
     - skip_missing: yes
 
 - name: install extensions
   become: yes
-  become_user: "{{ item.0.username }}"
+  become_user: '{{ item.0.username }}'
   command: "code --install-extension '{{ item.1 }}'"
   with_subelements:
-    - "{{ users }}"
+    - '{{ users }}'
     - visual_studio_code_extensions
     - skip_missing: yes
   register: vscode_result

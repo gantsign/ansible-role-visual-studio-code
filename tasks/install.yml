@@ -1,9 +1,9 @@
 ---
 - name: load version vars
   with_first_found:
-    - "../vars/versions/{{ visual_studio_code_version }}.yml"
+    - '../vars/versions/{{ visual_studio_code_version }}.yml'
     - ../vars/versions/default.yml
-  include_vars: "{{ item }}"
+  include_vars: '{{ item }}'
 
 - name: assert version vars
   assert:
@@ -15,7 +15,7 @@
   file:
     state: directory
     mode: 'u=rwx,go=rx'
-    dest: "{{ visual_studio_code_download_dir }}"
+    dest: '{{ visual_studio_code_download_dir }}'
 
 - name: ensure ca-certificates installed
   become: yes
@@ -25,9 +25,9 @@
 
 - name: download Visual Studio Code
   get_url:
-    url: "{{ visual_studio_code_redis_url }}"
-    dest: "{{ visual_studio_code_download_dir }}/{{ visual_studio_code_redis_filename }}"
-    sha256sum: "{{ visual_studio_code_redis_sha256sum }}"
+    url: '{{ visual_studio_code_redis_url }}'
+    dest: '{{ visual_studio_code_download_dir }}/{{ visual_studio_code_redis_filename }}'
+    sha256sum: '{{ visual_studio_code_redis_sha256sum }}'
     force: no
     use_proxy: yes
     validate_certs: yes
@@ -36,4 +36,4 @@
 - name: install Visual Studio Code
   become: yes
   apt:
-    deb: "{{ visual_studio_code_download_dir }}/{{ visual_studio_code_redis_filename }}"
+    deb: '{{ visual_studio_code_download_dir }}/{{ visual_studio_code_redis_filename }}'
