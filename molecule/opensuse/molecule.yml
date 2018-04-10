@@ -1,0 +1,31 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+lint:
+  name: yamllint
+
+platforms:
+  - name: ansible-role-visual-studio-code-opensuse
+    image: opensuse:42.3
+
+provisioner:
+  name: ansible
+  playbooks:
+    create: ../default/create.yml
+    destroy: ../default/destroy.yml
+    prepare: ../default/prepare.yml
+    converge: ../default/playbook.yml
+  lint:
+    name: ansible-lint
+
+scenario:
+  name: opensuse
+
+verifier:
+  name: testinfra
+  lint:
+    name: flake8

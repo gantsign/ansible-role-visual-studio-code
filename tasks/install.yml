@@ -2,7 +2,7 @@
 - name: assert supported distribution
   assert:
     that:
-      - "ansible_pkg_mgr in ('apt', 'yum', 'dnf')"
+      - "ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')"
 
 - include: install-apt.yml
   when: ansible_pkg_mgr == 'apt'
@@ -12,3 +12,6 @@
 
 - include: install-dnf.yml
   when: ansible_pkg_mgr == 'dnf'
+
+- include: install-zypper.yml
+  when: ansible_pkg_mgr == 'zypper'
