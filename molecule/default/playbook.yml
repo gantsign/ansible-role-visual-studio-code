@@ -33,3 +33,10 @@
           visual_studio_code_extensions: []
           visual_studio_code_settings: {}
         - username: test_usr3
+
+  post_tasks:
+    - name: install which
+      package:
+        name: which
+        state: present
+      when: ansible_pkg_mgr in ('yum', 'dnf', 'zypper')

@@ -11,7 +11,20 @@ Requirements
 ------------
 
 * Ansible >= 2.3 (earlier versions may work but are not tested)
-* Ubuntu
+
+* Linux Distribution
+
+    * Debian Family
+
+        * Ubuntu
+
+            * Xenial (16.04)
+
+    * RedHat Family
+
+        * CentOS
+
+            * 7
 
 Role Variables
 --------------

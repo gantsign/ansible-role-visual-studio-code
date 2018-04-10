@@ -1,5 +1,5 @@
 ---
-- name: install extension cli dependencies
+- name: install extension cli dependencies (apt)
   become: yes
   apt:
     name: '{{ item }}'
@@ -9,6 +9,7 @@
     - libasound2
     - libgtk2.0-0
     - libxss1
+  when: ansible_pkg_mgr == 'apt'
 
 - name: create config directories for users
   become: yes
