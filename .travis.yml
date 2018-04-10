@@ -16,6 +16,9 @@ matrix:
         - ANSIBLE_VERSION=2.3.3
         - MOLECULE_SCENARIO=fedora
     - env:
+        - ANSIBLE_VERSION=2.3.3
+        - MOLECULE_SCENARIO=opensuse
+    - env:
         - ANSIBLE_VERSION=2.4.4
         - MOLECULE_SCENARIO=centos-7
     - env:
@@ -24,6 +27,9 @@ matrix:
     - env:
         - ANSIBLE_VERSION=2.4.4
         - MOLECULE_SCENARIO=fedora
+    - env:
+        - ANSIBLE_VERSION=2.4.4
+        - MOLECULE_SCENARIO=opensuse
 
 # Require the standard build environment
 sudo: required
