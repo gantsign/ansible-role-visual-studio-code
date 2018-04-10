@@ -1,3 +1,2 @@
 ---
-# Filename of Visual Studio Code redistributable package
-visual_studio_code_redis_filename: 'code_{{ visual_studio_code_version }}_amd64.deb'
+# vars file for visual-studio-code

@@ -20,11 +20,8 @@ The following variables will change the behavior of this role (default values
 are shown below):
 
 ```yaml
-# Visual Studio Code version number
-visual_studio_code_version: '1.22.1'
-
-# Directory to store files downloaded for Visual Studio Code installation
-visual_studio_code_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
+# Visual Studio Code version number (defaults to the latest version)
+visual_studio_code_version: ''
 
 # Users to install extensions for and/or write settings.json
 users: []
@@ -39,75 +36,6 @@ users:
       - # extension 1
       - # extension 2
     visual_studio_code_settings: # JSON object
-```
-
-### Supported Visual Studio Code Versions
-
-The following versions of Visual Studio Code are supported without any
-additional configuration (for other versions follow the Advanced Configuration
-instructions):
-
-* `1.22.1`
-* `1.22`
-* `1.21.1`
-* `1.21`
-* `1.20.1`
-* `1.20`
-* `1.19.3`
-* `1.19.2`
-* `1.19.1`
-* `1.19`
-* `1.18.1`
-* `1.18`
-* `1.17.2`
-* `1.16.1`
-* `1.16`
-* Version `1.15.x` is not supported due to [vscode/32381](https://github.com/Microsoft/vscode/issues/32381).
-* `1.14.2`
-* `1.14.1`
-* `1.14`
-* `1.13.1`
-* `1.13`
-* `1.12.2`
-* `1.12.1`
-* `1.12`
-* `1.11.2`
-* `1.11.1`
-* `1.11`
-* `1.10.2`
-* `1.10.1`
-* `1.10`
-* `1.9.1`
-* `1.9`
-* `1.8.1`
-* `1.8`
-* `1.7.2`
-* `1.7.1`
-* `1.7`
-* `1.6.1`
-* `1.6`
-* `1.5.3`
-* `1.5.2`
-* `1.5.1`
-* `1.5`
-* `1.4`
-* `1.3.1`
-* `1.3`
-
-Advanced Configuration
-----------------------
-
-The following role variables are dependent on the Visual Studio Code version;
-to use a Visual Studio Code version **not pre-configured by this role** you
-must configure the variables below:
-
-```yaml
-# SHA256 sum for the redistributable package (e.g code_1.3.0-1467909982_amd64.deb)
-visual_studio_code_redis_sha256sum: '53eb2cd235b395a28e7fda6f50f904fd5665877e354609f836a6b60a1592c9c9'
-
-# The download URL for the redistributable package
-# Permanent download URLs can be found on https://code.visualstudio.com/Updates
-visual_studio_code_redis_url: 'https://az764295.vo.msecnd.net/stable/e724f269ded347b49fcf1657fc576399354e6703/code_1.3.0-1467909982_amd64.deb'
 ```
 
 Example Playbooks
