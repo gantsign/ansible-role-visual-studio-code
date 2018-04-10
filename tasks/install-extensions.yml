@@ -11,6 +11,13 @@
     - libxss1
   when: ansible_pkg_mgr == 'apt'
 
+- name: install extension cli dependencies (dnf)
+  become: yes
+  dnf:
+    name: libX11-xcb
+    state: present
+  when: ansible_pkg_mgr == 'dnf'
+
 - name: create config directories for users
   become: yes
   become_user: '{{ item.0.username }}'

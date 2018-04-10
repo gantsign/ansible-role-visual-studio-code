@@ -1,0 +1,16 @@
+---
+- name: install VS Code repo (dnf)
+  become: yes
+  yum_repository:
+    name: code
+    description: Visual Studio Code repo
+    file: vscode
+    baseurl: https://packages.microsoft.com/yumrepos/vscode
+    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+    gpgcheck: yes
+
+- name: install VS Code (dnf)
+  become: yes
+  dnf:
+    name: "code{{ (visual_studio_code_version != '') | ternary('-' + visual_studio_code_version, '') }}"
+    state: present
