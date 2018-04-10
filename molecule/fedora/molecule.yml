@@ -1,0 +1,32 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+lint:
+  name: yamllint
+
+platforms:
+  - name: ansible-role-visual-studio-code-fedora
+    image: fedora:27
+
+provisioner:
+  name: ansible
+  playbooks:
+    create: ../default/create.yml
+    destroy: ../default/destroy.yml
+    prepare: ../default/prepare.yml
+    converge: ../default/playbook.yml
+  lint:
+    name: ansible-lint
+
+scenario:
+  name: fedora
+
+verifier:
+  name: testinfra
+  directory: ../default/tests/
+  lint:
+    name: flake8
