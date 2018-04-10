@@ -6,6 +6,9 @@ galaxy_info:
   license: MIT
   min_ansible_version: 2.3
   platforms:
+    - name: EL
+      versions:
+        - 7
     - name: Ubuntu
       versions:
         - trusty

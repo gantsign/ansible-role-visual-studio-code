@@ -2,7 +2,10 @@
 - name: assert supported distribution
   assert:
     that:
-      - "ansible_pkg_mgr in ('apt')"
+      - "ansible_pkg_mgr in ('apt', 'yum')"
 
 - include: install-apt.yml
   when: ansible_pkg_mgr == 'apt'
+
+- include: install-yum.yml
+  when: ansible_pkg_mgr == 'yum'

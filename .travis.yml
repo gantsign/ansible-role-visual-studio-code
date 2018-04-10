@@ -2,10 +2,22 @@
 language: python
 python: '2.7'
 
-# Spin off separate builds for each of the following versions of Ansible
-env:
-  - ANSIBLE_VERSION=2.3.0
-  - ANSIBLE_VERSION=2.4.0
+# Spin off separate builds for each of the following versions
+# of Ansible and Linux.
+matrix:
+  include:
+    - env:
+        - ANSIBLE_VERSION=2.3.3
+        - MOLECULE_SCENARIO=centos-7
+    - env:
+        - ANSIBLE_VERSION=2.3.3
+        - MOLECULE_SCENARIO=default
+    - env:
+        - ANSIBLE_VERSION=2.4.4
+        - MOLECULE_SCENARIO=centos-7
+    - env:
+        - ANSIBLE_VERSION=2.4.4
+        - MOLECULE_SCENARIO=default
 
 # Require the standard build environment
 sudo: required
@@ -43,11 +55,11 @@ install:
   - molecule --version
 
   # Build the Docker images
-  - molecule create
-  - molecule destroy
+  - molecule create --scenario-name=$MOLECULE_SCENARIO
+  - molecule destroy --scenario-name=$MOLECULE_SCENARIO
 
 script:
-  - molecule test
+  - molecule test --scenario-name=$MOLECULE_SCENARIO
 
 branches:
   only:

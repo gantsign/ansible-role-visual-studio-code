@@ -9,7 +9,7 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-visual-studio-code-01
+  - name: ansible-role-visual-studio-code-ubuntu-xenial
     image: ubuntu:16.04
 
 provisioner:
