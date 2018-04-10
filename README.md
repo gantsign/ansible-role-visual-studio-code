@@ -132,7 +132,7 @@ Playbook with extensions installed:
           visual_studio_code_extensions:
             - streetsidesoftware.code-spell-checker
             - wholroyd.jinja
-            - donjayamanne.python
+            - ms-python.python
           visual_studio_code_settings: {
             "editor.rulers": [80, 100, 120],
             "editor.renderWhitespace": true,
