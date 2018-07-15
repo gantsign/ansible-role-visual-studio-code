@@ -4,14 +4,5 @@
     that:
       - "ansible_pkg_mgr in ('apt', 'yum', 'dnf', 'zypper')"
 
-- include: install-apt.yml
-  when: ansible_pkg_mgr == 'apt'
-
-- include: install-yum.yml
-  when: ansible_pkg_mgr == 'yum'
-
-- include: install-dnf.yml
-  when: ansible_pkg_mgr == 'dnf'
-
-- include: install-zypper.yml
-  when: ansible_pkg_mgr == 'zypper'
+- name: 'install ({{ ansible_pkg_mgr }})'
+  include_tasks: 'install-{{ ansible_pkg_mgr }}.yml'
