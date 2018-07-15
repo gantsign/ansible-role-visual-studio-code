@@ -18,6 +18,7 @@
   become: yes
   apt_repository:
     repo: deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main
+    filename: vscode
     state: present
 
 - name: install VS Code (apt)
