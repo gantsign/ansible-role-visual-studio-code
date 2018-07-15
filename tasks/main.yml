@@ -1,6 +1,6 @@
 ---
-- include: install.yml
+- import_tasks: install.yml
 
-- include: install-extensions.yml
+- import_tasks: install-extensions.yml
 
-- include: write-settings.yml
+- import_tasks: write-settings.yml
