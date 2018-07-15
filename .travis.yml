@@ -19,16 +19,16 @@ matrix:
         - ANSIBLE_VERSION=2.3.3
         - MOLECULE_SCENARIO=opensuse
     - env:
-        - ANSIBLE_VERSION=2.4.4
+        - ANSIBLE_VERSION=2.6.1
         - MOLECULE_SCENARIO=centos-7
     - env:
-        - ANSIBLE_VERSION=2.4.4
+        - ANSIBLE_VERSION=2.6.1
         - MOLECULE_SCENARIO=default
     - env:
-        - ANSIBLE_VERSION=2.4.4
+        - ANSIBLE_VERSION=2.6.1
         - MOLECULE_SCENARIO=fedora
     - env:
-        - ANSIBLE_VERSION=2.4.4
+        - ANSIBLE_VERSION=2.6.1
         - MOLECULE_SCENARIO=opensuse
 
 # Require the standard build environment
