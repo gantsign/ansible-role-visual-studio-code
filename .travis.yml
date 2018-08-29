@@ -8,7 +8,7 @@ matrix:
   include:
     - env:
         - ANSIBLE_VERSION=2.4.6
-        - MOLECULE_SCENARIO=centos-7
+        - MOLECULE_SCENARIO=centos
     - env:
         - ANSIBLE_VERSION=2.4.6
         - MOLECULE_SCENARIO=default
@@ -20,7 +20,7 @@ matrix:
         - MOLECULE_SCENARIO=opensuse
     - env:
         - ANSIBLE_VERSION=2.6.1
-        - MOLECULE_SCENARIO=centos-7
+        - MOLECULE_SCENARIO=centos
     - env:
         - ANSIBLE_VERSION=2.6.1
         - MOLECULE_SCENARIO=default

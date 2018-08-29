@@ -20,7 +20,7 @@ provisioner:
     name: ansible-lint
 
 scenario:
-  name: centos-7
+  name: centos
 
 verifier:
   name: testinfra
