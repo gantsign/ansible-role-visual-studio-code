@@ -9,7 +9,7 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-visual-studio-code-centos-7
+  - name: ansible-role-visual-studio-code-centos
     image: centos:7
 
 provisioner:
