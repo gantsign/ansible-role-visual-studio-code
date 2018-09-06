@@ -14,6 +14,9 @@ matrix:
         - MOLECULE_SCENARIO=default
     - env:
         - ANSIBLE_VERSION=2.4.6
+        - MOLECULE_SCENARIO=ubuntu-min
+    - env:
+        - ANSIBLE_VERSION=2.4.6
         - MOLECULE_SCENARIO=fedora
     - env:
         - ANSIBLE_VERSION=2.4.6
@@ -24,6 +27,9 @@ matrix:
     - env:
         - ANSIBLE_VERSION=2.6.1
         - MOLECULE_SCENARIO=default
+    - env:
+        - ANSIBLE_VERSION=2.6.1
+        - MOLECULE_SCENARIO=ubuntu-min
     - env:
         - ANSIBLE_VERSION=2.6.1
         - MOLECULE_SCENARIO=fedora
