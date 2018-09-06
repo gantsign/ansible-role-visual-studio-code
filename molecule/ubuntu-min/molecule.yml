@@ -9,18 +9,21 @@ lint:
   name: yamllint
 
 platforms:
-  - name: ansible-role-visual-studio-code-ubuntu-max
-    image: ubuntu:18.04
+  - name: ansible-role-visual-studio-code-ubuntu-min
+    image: ubuntu:16.04
 
 provisioner:
   name: ansible
+  playbooks:
+    converge: ../default/playbook.yml
   lint:
     name: ansible-lint
 
 scenario:
-  name: default
+  name: ubuntu-min
 
 verifier:
   name: testinfra
+  directory: ../default/tests
   lint:
     name: flake8
