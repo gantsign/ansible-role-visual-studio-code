@@ -6,8 +6,8 @@ testinfra_hosts = testinfra.utils.ansible_runner.AnsibleRunner(
     os.environ['MOLECULE_INVENTORY_FILE']).get_hosts('all')
 
 
-def test_settings(File):
-    settings_file = File('/home/test_usr/.config/Code/User/settings.json')
+def test_settings(host):
+    settings_file = host.file('/home/test_usr/.config/Code/User/settings.json')
 
     assert settings_file.exists
     assert settings_file.is_file
