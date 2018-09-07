@@ -10,7 +10,7 @@ lint:
 
 platforms:
   - name: ansible-role-visual-studio-code-fedora
-    image: fedora:27
+    image: fedora:28
 
 provisioner:
   name: ansible
