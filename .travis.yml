@@ -26,19 +26,19 @@ matrix:
         - MOLECULEW_ANSIBLE=2.4.6
         - MOLECULE_SCENARIO=opensuse
     - env:
-        - MOLECULEW_ANSIBLE=2.6.1
+        - MOLECULEW_ANSIBLE=2.7.0
         - MOLECULE_SCENARIO=centos
     - env:
-        - MOLECULEW_ANSIBLE=2.6.1
+        - MOLECULEW_ANSIBLE=2.7.0
         - MOLECULE_SCENARIO=default
     - env:
-        - MOLECULEW_ANSIBLE=2.6.1
+        - MOLECULEW_ANSIBLE=2.7.0
         - MOLECULE_SCENARIO=ubuntu-min
     - env:
-        - MOLECULEW_ANSIBLE=2.6.1
+        - MOLECULEW_ANSIBLE=2.7.0
         - MOLECULE_SCENARIO=fedora
     - env:
-        - MOLECULEW_ANSIBLE=2.6.1
+        - MOLECULEW_ANSIBLE=2.7.0
         - MOLECULE_SCENARIO=opensuse
 
 # Require the standard build environment
