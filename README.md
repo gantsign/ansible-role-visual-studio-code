@@ -10,7 +10,7 @@ Role to install the [Visual Studio Code](https://code.visualstudio.com) IDE / te
 Requirements
 ------------
 
-* Ansible >= 2.4
+* Ansible >= 2.5
 
 * Linux Distribution
 
