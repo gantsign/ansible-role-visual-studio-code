@@ -2,11 +2,10 @@
 - name: install dependencies (apt)
   become: yes
   apt:
-    name: '{{ item }}'
+    name:
+      - ca-certificates
+      - apt-transport-https
     state: present
-  with_items:
-    - ca-certificates
-    - apt-transport-https
 
 - name: install key (apt)
   become: yes

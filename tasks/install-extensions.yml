@@ -2,13 +2,12 @@
 - name: install extension cli dependencies (apt)
   become: yes
   apt:
-    name: '{{ item }}'
+    name:
+      - gconf2
+      - libasound2
+      - libgtk2.0-0
+      - libxss1
     state: present
-  with_items:
-    - gconf2
-    - libasound2
-    - libgtk2.0-0
-    - libxss1
   when: ansible_pkg_mgr == 'apt'
 
 - name: install extension cli dependencies (dnf)
