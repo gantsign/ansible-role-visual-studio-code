@@ -1,4 +1,10 @@
 ---
+- name: install dependencies (zypper)
+  become: yes
+  zypper:
+    name: which
+    state: present
+
 - name: install key (zypper)
   become: yes
   rpm_key:

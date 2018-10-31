@@ -1,0 +1,32 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+lint:
+  name: yamllint
+
+platforms:
+  - name: ansible-role-visual-studio-code-python3
+    image: ubuntu:18.04
+
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ../default/playbook.yml
+  options:
+    extra-vars:
+      ansible_python_interpreter: /usr/bin/python3
+  lint:
+    name: ansible-lint
+
+scenario:
+  name: python3
+
+verifier:
+  name: testinfra
+  directory: ../default/tests
+  lint:
+    name: flake8

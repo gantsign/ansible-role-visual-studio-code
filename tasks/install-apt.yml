@@ -5,6 +5,10 @@
     name:
       - ca-certificates
       - apt-transport-https
+      - gconf2
+      - libasound2
+      - libgtk2.0-0
+      - libxss1
     state: present
 
 - name: install key (apt)

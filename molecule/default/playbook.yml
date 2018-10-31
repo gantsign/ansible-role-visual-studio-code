@@ -15,6 +15,13 @@
         - test_usr2
         - test_usr3
 
+    - name: install gnupg2 (apt)
+      become: yes
+      apt:
+        name: gnupg2
+        state: present
+      when: ansible_pkg_mgr == 'apt'
+
     - name: install extension cli dependencies (zypper)
       become: yes
       zypper:
