@@ -1,4 +1,10 @@
 ---
+- name: install dependencies (yum)
+  become: yes
+  yum:
+    name: which
+    state: present
+
 - name: install VS Code repo (yum)
   become: yes
   yum_repository:
