@@ -1,4 +1,16 @@
 ---
+- name: create config directories for users
+  become: yes
+  become_user: '{{ item.0.username }}'
+  file:
+    path: '~{{ item.0.username }}/.config'
+    state: directory
+    mode: 'u=rwx,go=r'
+  with_subelements:
+    - '{{ users }}'
+    - visual_studio_code_extensions
+    - skip_missing: yes
+
 - name: create settings directory
   become: yes
   become_user: '{{ item.username }}'
