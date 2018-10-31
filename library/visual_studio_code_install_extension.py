@@ -21,9 +21,30 @@ def is_extension_installed(module, name):
     return match is not None
 
 
+def list_extension_dirs(module):
+    ext_dir = os.path.expanduser(
+        os.path.join('~', '.vscode', 'extensions'))
+
+    ext_dirs = [f for f in os.listdir(
+        ext_dir) if os.path.isdir(os.path.join(ext_dir, f))]
+    ext_dirs.sort()
+    return ext_dirs
+
+
 def install_extension(module, name):
     if is_extension_installed(module, name):
-        return False
+        # Use the fact that extension directories names contain the version number
+        before_ext_dirs = list_extension_dirs(module)
+        # Unfortunately `--force` suppresses errors (such as extension not found)
+        rc, out, err = module.run_command(
+            ['code', '--install-extension', '--force', name])
+        if rc != 0 or err:
+            module.fail_json(
+                msg='Error while upgrading extension [%s]: %s' % (name,
+                                                                  out + err))
+        after_ext_dirs = list_extension_dirs(module)
+        changed = before_ext_dirs != after_ext_dirs
+        return changed, 'upgrade'
     else:
         rc, out, err = module.run_command(
             ['code', '--install-extension', name])
@@ -31,7 +52,8 @@ def install_extension(module, name):
             module.fail_json(
                 msg='Error while installing extension [%s]: %s' % (name,
                                                                    out + err))
-        return not 'already installed' in out
+        changed = not 'already installed' in out
+        return changed, 'install'
 
 
 def run_module():
@@ -44,10 +66,13 @@ def run_module():
 
     name = module.params['name']
 
-    changed = install_extension(module, name)
+    changed, change = install_extension(module, name)
 
     if changed:
-        msg = '%s is now installed' % name
+        if change == 'upgrade':
+            msg = '%s was upgraded' % name
+        else:
+            msg = '%s is now installed' % name
     else:
         msg = '%s is already installed' % name
 
