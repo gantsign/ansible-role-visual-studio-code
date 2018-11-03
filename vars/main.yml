@@ -1,2 +1,7 @@
 ---
 # vars file for visual-studio-code
+config_path: "{{ config_path_mac if ansible_distribution == 'MacOSX' else config_path_linux }}"
+config_path_linux: .config
+config_path_mac: "Library/Application Support"
+
+vscode_config_path: "{{ config_path }}/Code"

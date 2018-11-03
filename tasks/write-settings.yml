@@ -3,7 +3,7 @@
   become: yes
   become_user: '{{ item.0.username }}'
   file:
-    path: '~{{ item.0.username }}/.config'
+    path: '~{{ item.0.username }}/{{ config_path }}'
     state: directory
     mode: 'u=rwx,go=r'
   with_subelements:
@@ -15,7 +15,7 @@
   become: yes
   become_user: '{{ item.username }}'
   file:
-    path: '~{{ item.username }}/.config/Code/User'
+    path: '~{{ item.username }}/{{ vscode_config_path }}/User'
     state: directory
     mode: 'u=rwx,go='
   with_items: '{{ users }}'
@@ -25,7 +25,7 @@
   become_user: '{{ item.username }}'
   template:
     src: settings.json.j2
-    dest: '~{{ item.username }}/.config/Code/User/settings.json'
+    dest: '~{{ item.username }}/{{ vscode_config_path }}/User/settings.json'
     force: no
     mode: 'u=rw,go='
   with_items: '{{ users }}'
