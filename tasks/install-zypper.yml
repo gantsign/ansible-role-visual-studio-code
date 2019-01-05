@@ -4,6 +4,7 @@
   zypper:
     name: which
     state: present
+    update_cache: yes
 
 - name: install key (zypper)
   become: yes

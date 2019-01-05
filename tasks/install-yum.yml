@@ -4,6 +4,7 @@
   yum:
     name: which
     state: present
+    update_cache: yes
 
 - name: install VS Code repo (yum)
   become: yes

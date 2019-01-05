@@ -10,6 +10,7 @@
       - libgtk2.0-0
       - libxss1
     state: present
+    update_cache: yes
 
 - name: install key (apt)
   become: yes
