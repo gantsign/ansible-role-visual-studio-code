@@ -37,7 +37,7 @@ def install_extension(module, name):
         before_ext_dirs = list_extension_dirs(module)
         # Unfortunately `--force` suppresses errors (such as extension not found)
         rc, out, err = module.run_command(
-            ['code', '--install-extension', '--force', name])
+            ['code', '--install-extension', name, '--force'])
         # Whitelist: [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues.
         if rc != 0 or (err and '[DEP0005]' not in err):
             module.fail_json(
