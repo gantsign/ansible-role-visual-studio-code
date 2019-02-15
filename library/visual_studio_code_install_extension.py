@@ -38,20 +38,24 @@ def install_extension(module, name):
         # Unfortunately `--force` suppresses errors (such as extension not found)
         rc, out, err = module.run_command(
             ['code', '--install-extension', '--force', name])
-        if rc != 0 or err:
+        # Whitelist: [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues.
+        if rc != 0 or (err and '[DEP0005]' not in err):
             module.fail_json(
-                msg='Error while upgrading extension [%s]: %s' % (name,
-                                                                  out + err))
+                msg='Error while upgrading extension [%s]: (%d) %s' % (name,
+                                                                       rc,
+                                                                       out + err))
         after_ext_dirs = list_extension_dirs(module)
         changed = before_ext_dirs != after_ext_dirs
         return changed, 'upgrade'
     else:
         rc, out, err = module.run_command(
             ['code', '--install-extension', name])
-        if rc != 0 or err:
+        # Whitelist: [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues.
+        if rc != 0 or (err and '[DEP0005]' not in err):
             module.fail_json(
-                msg='Error while installing extension [%s]: %s' % (name,
-                                                                   out + err))
+                msg='Error while installing extension [%s]: (%d) %s' % (name,
+                                                                        rc,
+                                                                        out + err))
         changed = not 'already installed' in out
         return changed, 'install'
 
