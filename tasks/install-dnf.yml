@@ -20,5 +20,5 @@
 - name: install VS Code (dnf)
   become: yes
   dnf:
-    name: "code{{ (visual_studio_code_version != '') | ternary('-' + visual_studio_code_version, '') }}"
+    name: "code{{ (visual_studio_code_version | length > 0) | ternary('-' + visual_studio_code_version, '') }}"
     state: present
