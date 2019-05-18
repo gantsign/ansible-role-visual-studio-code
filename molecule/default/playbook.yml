@@ -29,6 +29,13 @@
         state: present
       when: ansible_pkg_mgr == 'zypper'
 
+    - name: install extension cli dependencies (apt)
+      become: yes
+      apt:
+        name: libx11-xcb1
+        state: present
+      when: ansible_pkg_mgr == 'apt'
+
   roles:
     - role: ansible-role-visual-studio-code
       users:
