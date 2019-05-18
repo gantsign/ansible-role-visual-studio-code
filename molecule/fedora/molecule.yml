@@ -11,6 +11,7 @@ lint:
 platforms:
   - name: ansible-role-visual-studio-code-fedora
     image: fedora:28
+    dockerfile: ../default/Dockerfile.j2
 
 provisioner:
   name: ansible
