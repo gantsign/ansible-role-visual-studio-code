@@ -23,5 +23,5 @@
 - name: install VS Code (zypper)
   become: yes
   zypper:
-    name: "code{{ (visual_studio_code_version != '') | ternary('=' + visual_studio_code_version, '') }}"
+    name: "code{{ (visual_studio_code_version | length > 0) | ternary('=' + visual_studio_code_version, '') }}"
     state: present

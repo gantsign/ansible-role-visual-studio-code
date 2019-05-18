@@ -5,22 +5,18 @@ Docker driver installation guide
 Requirements
 ============
 
-* General molecule dependencies (see https://molecule.readthedocs.io/en/latest/installation.html)
 * Docker Engine
-* docker-py
-* docker
 
 Install
 =======
 
-Ansible < 2.6
+Please refer to the `Virtual environment`_ documentation for installation best
+practices. If not using a virtual environment, please consider passing the
+widely recommended `'--user' flag`_ when invoking ``pip``.
+
+.. _Virtual environment: https://virtualenv.pypa.io/en/latest/
+.. _'--user' flag: https://packaging.python.org/tutorials/installing-packages/#installing-to-the-user-site
 
 .. code-block:: bash
 
-    $ sudo pip install docker-py
-
-Ansible >= 2.6
-
-.. code-block:: bash
-
-    $ sudo pip install docker
+    $ pip install 'molecule[docker]'
