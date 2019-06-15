@@ -2,6 +2,10 @@
 # Visual Studio Code version number (defaults to the latest version)
 visual_studio_code_version: ''
 
+# Build (either 'stable' or 'insiders') https://code.visualstudio.com/insiders/
+# Ubuntu only (code-insiders isn't in Microsoft's RPM repo)
+visual_studio_code_build: stable
+
 # Directory to store files downloaded for Visual Studio Code installation
 visual_studio_code_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
 

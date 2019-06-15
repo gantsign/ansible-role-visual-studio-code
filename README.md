@@ -49,6 +49,10 @@ are shown below):
 # Visual Studio Code version number (defaults to the latest version)
 visual_studio_code_version: ''
 
+# Build (either 'stable' or 'insiders') https://code.visualstudio.com/insiders/
+# Ubuntu only (code-insiders isn't in Microsoft's RPM repo)
+visual_studio_code_build: stable
+
 # Users to install extensions for and/or write settings.json
 users: []
 ```

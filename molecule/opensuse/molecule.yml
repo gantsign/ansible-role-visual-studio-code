@@ -16,7 +16,7 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
-    converge: ../default/playbook.yml
+    converge: ../code-only/playbook.yml
   lint:
     name: ansible-lint
 
