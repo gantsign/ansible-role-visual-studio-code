@@ -18,7 +18,7 @@ galaxy_info:
         - 28
     - name: opensuse
       versions:
-        - 15.0
+        - 15.1
   galaxy_tags:
     - code
     - editor
