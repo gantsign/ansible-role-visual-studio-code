@@ -3,6 +3,7 @@
   become: yes
   become_user: '{{ item.0.username }}'
   visual_studio_code_install_extension:
+    executable: '{{ visual_studio_code_exe }}'
     name: '{{ item.1 }}'
   with_subelements:
     - '{{ users }}'

@@ -16,7 +16,7 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
-    converge: ../default/playbook.yml
+    converge: ../code-only/playbook.yml
   lint:
     name: ansible-lint
 
@@ -25,6 +25,6 @@ scenario:
 
 verifier:
   name: testinfra
-  directory: ../default/tests
+  directory: ../code-only/tests
   lint:
     name: flake8

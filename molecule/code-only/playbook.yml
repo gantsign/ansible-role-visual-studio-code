@@ -54,24 +54,6 @@
           visual_studio_code_extensions: []
           visual_studio_code_settings: {}
         - username: test_usr3
-    - role: ansible-role-visual-studio-code
-      visual_studio_code_build: 'insiders'
-      users:
-        - username: test_usr
-          visual_studio_code_extensions:
-            - ms-python.python
-            - wholroyd.jinja
-          visual_studio_code_settings: {
-            "editor.rulers": [80, 100, 120],
-            "editor.renderWhitespace": true,
-            "files.associations": {
-              "Vagrantfile": "ruby"
-            }
-          }
-        - username: test_usr2
-          visual_studio_code_extensions: []
-          visual_studio_code_settings: {}
-        - username: test_usr3
 
   post_tasks:
     - name: install which
