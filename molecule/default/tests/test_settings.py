@@ -19,7 +19,7 @@ def test_settings(host):
 
 def test_settings_insiders(host):
     settings_file = host.file(
-        '/home/test_usr/.config/Code-Insiders/User/settings.json')
+        '/home/test_usr/.config/Code - Insiders/User/settings.json')
 
     assert settings_file.exists
     assert settings_file.is_file
