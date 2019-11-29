@@ -13,20 +13,24 @@
 
 - name: create settings directory
   become: yes
-  become_user: '{{ item.username }}'
+  become_user: '{{ username }}'
   file:
-    path: '~{{ item.username }}/{{ visual_studio_code_config_path }}/User'
+    path: '~{{ username }}/{{ visual_studio_code_config_path }}/User'
     state: directory
     mode: 'u=rwx,go='
-  with_items: '{{ users }}'
+  with_items: "{{ users | map(attribute='username') | list }}"
+  loop_control:
+    loop_var: username
 
 - name: write settings
   become: yes
-  become_user: '{{ item.username }}'
+  become_user: '{{ user.username }}'
   template:
     src: settings.json.j2
-    dest: '~{{ item.username }}/{{ visual_studio_code_config_path }}/User/settings.json'
+    dest: '~{{ user.username }}/{{ visual_studio_code_config_path }}/User/settings.json'
     force: no
     mode: 'u=rw,go='
   with_items: '{{ users }}'
-  when: "item.visual_studio_code_settings is defined and item.visual_studio_code_settings not in ({}, '', None, omit)"
+  loop_control:
+    loop_var: user
+  when: "user.visual_studio_code_settings is defined and user.visual_studio_code_settings not in ({}, '', None, omit)"
