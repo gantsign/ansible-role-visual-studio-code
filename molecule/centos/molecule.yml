@@ -11,7 +11,6 @@ lint:
 platforms:
   - name: ansible-role-visual-studio-code-centos
     image: centos:7
-    dockerfile: ../default/Dockerfile.j2
 
 provisioner:
   name: ansible
@@ -19,6 +18,10 @@ provisioner:
     converge: ../code-only/playbook.yml
   lint:
     name: ansible-lint
+  inventory:
+    host_vars:
+      instance:
+        ansible_user: ansible
 
 scenario:
   name: centos
