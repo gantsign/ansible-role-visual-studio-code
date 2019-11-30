@@ -1,26 +1,27 @@
 ---
 - name: create config directories for users
   become: yes
-  become_user: '{{ item.0.username }}'
+  become_user: '{{ user.username }}'
   file:
-    path: '~{{ item.0.username }}/{{ visual_studio_code_config_path }}'
+    path: '~{{ user.username }}/{{ visual_studio_code_config_path }}'
     state: directory
-    mode: 'u=rwx,go=r'
-  with_subelements:
-    - '{{ users }}'
-    - visual_studio_code_extensions
-    - skip_missing: yes
+    mode: 'u=rwx,go=rx'
+  with_items: '{{ users }}'
+  loop_control:
+    loop_var: user
+  when: "user.visual_studio_code_settings is defined and user.visual_studio_code_settings not in ({}, '', None, omit)"
 
 - name: create settings directory
   become: yes
-  become_user: '{{ username }}'
+  become_user: '{{ user.username }}'
   file:
-    path: '~{{ username }}/{{ visual_studio_code_config_path }}/User'
+    path: '~{{ user.username }}/{{ visual_studio_code_config_path }}/User'
     state: directory
     mode: 'u=rwx,go='
-  with_items: "{{ users | map(attribute='username') | list }}"
+  with_items: '{{ users }}'
   loop_control:
-    loop_var: username
+    loop_var: user
+  when: "user.visual_studio_code_settings is defined and user.visual_studio_code_settings not in ({}, '', None, omit)"
 
 - name: write settings
   become: yes
