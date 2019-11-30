@@ -78,6 +78,10 @@ install:
 script:
   - ./moleculew test --scenario-name=$MOLECULE_SCENARIO
 
+cache:
+  directories:
+    - $HOME/.moleculew
+
 branches:
   only:
     - master
