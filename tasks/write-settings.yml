@@ -9,6 +9,7 @@
   with_items: '{{ users }}'
   loop_control:
     loop_var: user
+    label: '{{ user.username }}'
   when: "user.visual_studio_code_settings is defined and user.visual_studio_code_settings not in ({}, '', None, omit)"
 
 - name: create settings directory
@@ -21,6 +22,7 @@
   with_items: '{{ users }}'
   loop_control:
     loop_var: user
+    label: '{{ user.username }}'
   when: "user.visual_studio_code_settings is defined and user.visual_studio_code_settings not in ({}, '', None, omit)"
 
 - name: write settings
@@ -34,4 +36,5 @@
   with_items: '{{ users }}'
   loop_control:
     loop_var: user
+    label: '{{ user.username }}'
   when: "user.visual_studio_code_settings is defined and user.visual_studio_code_settings not in ({}, '', None, omit)"
