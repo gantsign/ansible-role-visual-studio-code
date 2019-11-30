@@ -21,6 +21,10 @@ provisioner:
       ansible_python_interpreter: /usr/bin/python3
   lint:
     name: ansible-lint
+  inventory:
+    host_vars:
+      instance:
+        ansible_user: ansible
 
 scenario:
   name: python3

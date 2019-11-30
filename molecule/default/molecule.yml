@@ -16,6 +16,10 @@ provisioner:
   name: ansible
   lint:
     name: ansible-lint
+  inventory:
+    host_vars:
+      instance:
+        ansible_user: ansible
 
 scenario:
   name: default
