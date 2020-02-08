@@ -58,9 +58,6 @@ matrix:
         - MOLECULE_SCENARIO=python3
       python: '3.6'
 
-# Require the standard build environment
-sudo: required
-
 # Require Ubuntu 16.04
 dist: xenial
 
