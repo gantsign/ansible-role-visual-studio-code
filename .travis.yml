@@ -61,8 +61,8 @@ matrix:
 # Require the standard build environment
 sudo: required
 
-# Require Ubuntu 14.04
-dist: trusty
+# Require Ubuntu 16.04
+dist: xenial
 
 # Require Docker
 services:
