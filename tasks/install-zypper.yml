@@ -9,7 +9,7 @@
   become: yes
   rpm_key:
     state: present
-    key: "{{packages_microsoft_com}}/keys/microsoft.asc"
+    key: "{{ packages_microsoft_com }}/keys/microsoft.asc"
 
 - name: write repo configuration (zypper)
   become: yes
