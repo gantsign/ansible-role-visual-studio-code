@@ -11,3 +11,7 @@ visual_studio_code_download_dir: "{{ x_ansible_download_dir | default(ansible_en
 
 # Users to install extensions for and/or write settings.json
 users: []
+
+# If you want to use some mirror server, then with this you can override the server protocol and URL, e.g. on the command line by using ansible extra-vars.
+# Adding leading directories is possible if needed but no trailing slash should be used.
+packages_microsoft_com: "https://packages.microsoft.com"
