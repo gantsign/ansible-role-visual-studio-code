@@ -9,9 +9,10 @@ visual_studio_code_build: stable
 # Directory to store files downloaded for Visual Studio Code installation
 visual_studio_code_download_dir: "{{ x_ansible_download_dir | default(ansible_env.HOME + '/.ansible/tmp/downloads') }}"
 
+# Mirror server for fetching the public keys and the Visual Studio Code
+# installation package. The URL may include directories. The URL must not end
+# with a trailing slash.
+visual_studio_code_mirror: 'https://packages.microsoft.com'
+
 # Users to install extensions for and/or write settings.json
 users: []
-
-# If you want to use some mirror server, then with this you can override the server protocol and URL, e.g. on the command line by using ansible extra-vars.
-# Adding leading directories is possible if needed but no trailing slash should be used.
-packages_microsoft_com: "https://packages.microsoft.com"

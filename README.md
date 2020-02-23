@@ -53,6 +53,11 @@ visual_studio_code_version: ''
 # Ubuntu only (code-insiders isn't in Microsoft's RPM repo)
 visual_studio_code_build: stable
 
+# Mirror server for fetching the public keys and the Visual Studio Code
+# installation package. The URL may include directories. The URL must not end
+# with a trailing slash.
+visual_studio_code_mirror: 'https://packages.microsoft.com'
+
 # Users to install extensions for and/or write settings.json
 users: []
 ```
