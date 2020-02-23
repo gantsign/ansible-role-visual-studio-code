@@ -13,8 +13,8 @@
     name: code
     description: Visual Studio Code repo
     file: vscode
-    baseurl: https://packages.microsoft.com/yumrepos/vscode
-    gpgkey: https://packages.microsoft.com/keys/microsoft.asc
+    baseurl: "{{ packages_microsoft_com }}/yumrepos/vscode"
+    gpgkey: "{{ packages_microsoft_com }}/keys/microsoft.asc"
     gpgcheck: yes
 
 - name: install VS Code (dnf)
