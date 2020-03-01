@@ -70,6 +70,7 @@ users:
     visual_studio_code_extensions:
       - # extension 1
       - # extension 2
+    visual_studio_code_settings_force_overwrite: # Force update the settings. Options: "yes" or "no"
     visual_studio_code_settings: # JSON object
 ```
 

@@ -31,7 +31,7 @@
   template:
     src: settings.json.j2
     dest: '~{{ user.username }}/{{ visual_studio_code_config_path }}/User/settings.json'
-    force: no
+    force: '{{user.visual_studio_code_settings_force_overwrite | default("no")}}'
     mode: 'u=rw,go='
   with_items: '{{ users }}'
   loop_control:
