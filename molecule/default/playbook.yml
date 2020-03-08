@@ -72,7 +72,7 @@
         - username: test_usr3
         - username: test_usr4
           visual_studio_code_settings: {}
-          visual_studio_code_settings_force_overwrite: yes
+          visual_studio_code_settings_overwrite: yes
     - role: ansible-role-visual-studio-code
       visual_studio_code_build: 'insiders'
       users:
