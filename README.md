@@ -70,6 +70,7 @@ users:
     visual_studio_code_extensions:
       - # extension 1
       - # extension 2
+    visual_studio_code_settings_overwrite: # Overwrite the settings file if it exists. Options: boolean "yes" or "no" (defaults to "no").
     visual_studio_code_settings: # JSON object
 ```
 
@@ -84,7 +85,7 @@ Minimal playbook:
     - role: gantsign.visual-studio-code
 ```
 
-Playbook with extensions installed:
+Playbook with extensions installed that overwrites settings:
 
 ```yaml
 - hosts: servers
@@ -96,6 +97,7 @@ Playbook with extensions installed:
             - streetsidesoftware.code-spell-checker
             - wholroyd.jinja
             - ms-python.python
+          visual_studio_code_settings_overwrite: yes
           visual_studio_code_settings: {
             "editor.rulers": [80, 100, 120],
             "editor.renderWhitespace": true,

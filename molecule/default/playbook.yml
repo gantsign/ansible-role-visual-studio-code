@@ -14,6 +14,7 @@
         - test_usr
         - test_usr2
         - test_usr3
+        - test_usr4
 
     - name: install gnupg2 (apt)
       become: yes
@@ -36,6 +37,21 @@
         state: present
       when: ansible_pkg_mgr == 'apt'
 
+    - name: create settings directory
+      become: yes
+      become_user: test_usr4
+      file:
+        path: /home/test_usr4/.config/Code/User
+        state: directory
+        mode: 'u=rwx,go='
+
+    - name: install default settings
+      become: yes
+      become_user: test_usr4
+      copy:
+        content: '{"remove_me": true}'
+        dest: /home/test_usr4/.config/Code/User/settings.json
+
   roles:
     - role: ansible-role-visual-studio-code
       users:
@@ -54,6 +70,9 @@
           visual_studio_code_extensions: []
           visual_studio_code_settings: {}
         - username: test_usr3
+        - username: test_usr4
+          visual_studio_code_settings: {}
+          visual_studio_code_settings_overwrite: yes
     - role: ansible-role-visual-studio-code
       visual_studio_code_build: 'insiders'
       users:
