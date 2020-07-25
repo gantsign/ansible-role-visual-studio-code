@@ -4,6 +4,7 @@
   become_user: '{{ item.0.username }}'
   visual_studio_code_install_extension:
     executable: '{{ visual_studio_code_exe }}'
+    userdatadir: '{{ item.0.visual_studio_code_userdata_dir | default("") }}'
     name: '{{ item.1 }}'
   with_subelements:
     - '{{ users }}'
