@@ -10,8 +10,11 @@ from ansible.module_utils.basic import AnsibleModule
 __metaclass__ = type
 
 
-def is_extension_installed(module, executable, name):
-    rc, out, err = module.run_command([executable, '--list-extensions', name])
+def is_extension_installed(module, executable, name, userdatadir):
+    if userdatadir != "":
+        rc, out, err = module.run_command([executable, '--user-data-dir', userdatadir, '--list-extensions', name])
+    else:
+        rc, out, err = module.run_command([executable, '--list-extensions', name])
     if rc != 0 or err:
         module.fail_json(
             msg='Error querying installed extensions [%s]: %s' % (name,
@@ -21,13 +24,17 @@ def is_extension_installed(module, executable, name):
     return match is not None
 
 
-def list_extension_dirs(module, executable):
-    dirname = '.vscode'
-    if executable == 'code-insiders':
-        dirname += '-insiders'
+def list_extension_dirs(module, executable, userdatadir):
+    if userdatadir != "":
+         ext_dir = os.path.expanduser(
+        os.path.join(userdatadir, 'extensions'))
+    else:
+        dirname = '.vscode'
+        if executable == 'code-insiders':
+            dirname += '-insiders'
 
-    ext_dir = os.path.expanduser(
-        os.path.join('~', dirname, 'extensions'))
+        ext_dir = os.path.expanduser(
+            os.path.join('~', dirname, 'extensions'))
 
     ext_dirs = [f for f in os.listdir(
         ext_dir) if os.path.isdir(os.path.join(ext_dir, f))]
@@ -35,25 +42,33 @@ def list_extension_dirs(module, executable):
     return ext_dirs
 
 
-def install_extension(module, executable, name):
-    if is_extension_installed(module, executable, name):
+def install_extension(module, executable, name, userdatadir):
+    if is_extension_installed(module, executable, name, userdatadir):
         # Use the fact that extension directories names contain the version number
-        before_ext_dirs = list_extension_dirs(module, executable)
-        # Unfortunately `--force` suppresses errors (such as extension not found)
-        rc, out, err = module.run_command(
-            [executable, '--install-extension', name, '--force'])
+        before_ext_dirs = list_extension_dirs(module, executable, userdatadir)
+        if userdatadir != "":
+            # Unfortunately `--force` suppresses errors (such as extension not found)
+            rc, out, err = module.run_command(
+                [executable, '--user-data-dir', userdatadir, '--install-extension', name, '--force'])
+        else:
+            rc, out, err = module.run_command(
+                [executable, '--install-extension', name, '--force'])
         # Whitelist: [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues.
         if rc != 0 or (err and '[DEP0005]' not in err):
             module.fail_json(
                 msg='Error while upgrading extension [%s]: (%d) %s' % (name,
                                                                        rc,
                                                                        out + err))
-        after_ext_dirs = list_extension_dirs(module, executable)
+        after_ext_dirs = list_extension_dirs(module, executable, userdatadir)
         changed = before_ext_dirs != after_ext_dirs
         return changed, 'upgrade'
     else:
-        rc, out, err = module.run_command(
-            [executable, '--install-extension', name])
+        if userdatadir != "":
+            rc, out, err = module.run_command(
+                [executable, '--user-data-dir', userdatadir, '--install-extension', name])
+        else:
+            rc, out, err = module.run_command(
+                [executable, '--install-extension', name])
         # Whitelist: [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues.
         if rc != 0 or (err and '[DEP0005]' not in err):
             module.fail_json(
@@ -68,6 +83,7 @@ def run_module():
 
     module_args = dict(
         executable=dict(type='str', required=False, choices=['code', 'code-insiders'], default='code'),
+        userdatadir=dict(type='str', required=False),
         name=dict(type='str', required=True))
 
     module = AnsibleModule(argument_spec=module_args,
@@ -78,8 +94,9 @@ def run_module():
         executable = 'code'
 
     name = module.params['name']
+    userdatadir = module.params['userdatadir']
 
-    changed, change = install_extension(module, executable, name)
+    changed, change = install_extension(module, executable, name, userdatadir)
 
     if changed:
         if change == 'upgrade':

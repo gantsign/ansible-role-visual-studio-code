@@ -67,11 +67,13 @@ Users are configured as follows:
 ```yaml
 users:
   - username: # Unix user name
+    visual_studio_code_userdata_dir: #absolute path to userdatadir (optional)
     visual_studio_code_extensions:
       - # extension 1
       - # extension 2
     visual_studio_code_settings_overwrite: # Overwrite the settings file if it exists. Options: boolean "yes" or "no" (defaults to "no").
     visual_studio_code_settings: # JSON object
+    
 ```
 
 Example Playbooks
@@ -93,6 +95,20 @@ Playbook with extensions installed that overwrites settings:
     - role: gantsign.visual-studio-code
       users:
         - username: vagrant
+          visual_studio_code_extensions:
+            - streetsidesoftware.code-spell-checker
+            - wholroyd.jinja
+            - ms-python.python
+          visual_studio_code_settings_overwrite: yes
+          visual_studio_code_settings: {
+            "editor.rulers": [80, 100, 120],
+            "editor.renderWhitespace": true,
+            "files.associations": {
+              "Vagrantfile": "ruby"
+            }
+          }
+        - ussername: root
+          visual_studio_code_userdata_dir: /root/.vscode
           visual_studio_code_extensions:
             - streetsidesoftware.code-spell-checker
             - wholroyd.jinja
