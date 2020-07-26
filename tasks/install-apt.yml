@@ -9,6 +9,9 @@
       - libasound2
       - libgtk2.0-0
       - libxss1
+      - libxcb-dri3-0
+      - libdrm2
+      - libgbm1
     state: present
 
 - name: install key (apt)
