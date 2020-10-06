@@ -51,6 +51,7 @@
       copy:
         content: '{"remove_me": true}'
         dest: /home/test_usr4/.config/Code/User/settings.json
+        mode: 'u=rw,go='
 
   roles:
     - role: ansible-role-visual-studio-code

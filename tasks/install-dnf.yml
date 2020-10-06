@@ -3,7 +3,9 @@
   become: yes
   dnf:
     name:
+      - libdrm
       - libX11-xcb
+      - mesa-libgbm
       - which
     state: present
 
