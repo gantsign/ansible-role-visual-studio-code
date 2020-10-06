@@ -2,7 +2,11 @@
 - name: install dependencies (zypper)
   become: yes
   zypper:
-    name: which
+    name:
+      - libdrm2
+      - libgbm1
+      - libxcb-dri3-0
+      - which
     state: present
 
 - name: install key (zypper)
