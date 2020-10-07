@@ -10,27 +10,27 @@ env:
 jobs:
   include:
     - env:
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
         - MOLECULE_SCENARIO=centos
       python: '2.7'
     - env:
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
         - MOLECULE_SCENARIO=default
       python: '2.7'
     - env:
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
         - MOLECULE_SCENARIO=ubuntu-min
       python: '2.7'
     - env:
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
         - MOLECULE_SCENARIO=fedora
       python: '2.7'
     - env:
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
         - MOLECULE_SCENARIO=opensuse
       python: '2.7'
     - env:
-        - MOLECULEW_ANSIBLE=2.7.15
+        - MOLECULEW_ANSIBLE=2.8.16
         - MOLECULE_SCENARIO=python3
       python: '3.6'
     - env:
