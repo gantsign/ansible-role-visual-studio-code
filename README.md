@@ -1,7 +1,7 @@
 Ansible Role: Visual Studio Code
 ================================
 
-[![Build Status](https://travis-ci.org/gantsign/ansible-role-visual-studio-code.svg?branch=master)](https://travis-ci.org/gantsign/ansible-role-visual-studio-code)
+[![Build Status](https://travis-ci.com/gantsign/ansible-role-visual-studio-code.svg?branch=master)](https://travis-ci.com/gantsign/ansible-role-visual-studio-code)
 [![Ansible Galaxy](https://img.shields.io/badge/ansible--galaxy-gantsign.visual--studio--code-blue.svg)](https://galaxy.ansible.com/gantsign/visual-studio-code)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/gantsign/ansible-role-visual-studio-code/master/LICENSE)
 
