@@ -5,8 +5,11 @@ dependency:
 driver:
   name: docker
 
-lint:
-  name: yamllint
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+  flake8
 
 platforms:
   - name: ansible-role-visual-studio-code-opensuse
@@ -15,18 +18,11 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
-    converge: ../code-only/playbook.yml
-  lint:
-    name: ansible-lint
+    converge: ../code-only/converge.yml
   inventory:
     host_vars:
       instance:
         ansible_user: ansible
 
-scenario:
-  name: opensuse
-
 verifier:
   name: testinfra
-  lint:
-    name: flake8
