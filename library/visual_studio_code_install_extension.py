@@ -29,46 +29,55 @@ def list_extension_dirs(module, executable):
     ext_dir = os.path.expanduser(
         os.path.join('~', dirname, 'extensions'))
 
-    ext_dirs = [f for f in os.listdir(
-        ext_dir) if os.path.isdir(os.path.join(ext_dir, f))]
-    ext_dirs.sort()
+    ext_dirs = sorted([f for f in os.listdir(
+        ext_dir) if os.path.isdir(os.path.join(ext_dir, f))])
     return ext_dirs
 
 
 def install_extension(module, executable, name):
     if is_extension_installed(module, executable, name):
-        # Use the fact that extension directories names contain the version number
+        # Use the fact that extension directories names contain the version
+        # number
         before_ext_dirs = list_extension_dirs(module, executable)
-        # Unfortunately `--force` suppresses errors (such as extension not found)
+        # Unfortunately `--force` suppresses errors (such as extension not
+        # found)
         rc, out, err = module.run_command(
             [executable, '--install-extension', name, '--force'])
-        # Whitelist: [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues.
+        # Whitelist: [DEP0005] DeprecationWarning: Buffer() is deprecated due
+        # to security and usability issues.
         if rc != 0 or (err and '[DEP0005]' not in err):
             module.fail_json(
-                msg='Error while upgrading extension [%s]: (%d) %s' % (name,
-                                                                       rc,
-                                                                       out + err))
+                msg='Error while upgrading extension [%s]: (%d) %s' %
+                (name, rc, out + err))
         after_ext_dirs = list_extension_dirs(module, executable)
         changed = before_ext_dirs != after_ext_dirs
         return changed, 'upgrade'
     else:
         rc, out, err = module.run_command(
             [executable, '--install-extension', name])
-        # Whitelist: [DEP0005] DeprecationWarning: Buffer() is deprecated due to security and usability issues.
+        # Whitelist: [DEP0005] DeprecationWarning: Buffer() is deprecated due
+        # to security and usability issues.
         if rc != 0 or (err and '[DEP0005]' not in err):
             module.fail_json(
-                msg='Error while installing extension [%s]: (%d) %s' % (name,
-                                                                        rc,
-                                                                        out + err))
-        changed = not 'already installed' in out
+                msg='Error while installing extension [%s]: (%d) %s' %
+                (name, rc, out + err))
+        changed = 'already installed' not in out
         return changed, 'install'
 
 
 def run_module():
 
     module_args = dict(
-        executable=dict(type='str', required=False, choices=['code', 'code-insiders'], default='code'),
-        name=dict(type='str', required=True))
+        executable=dict(
+            type='str',
+            required=False,
+            choices=[
+                'code',
+                'code-insiders'],
+            default='code'),
+        name=dict(
+            type='str',
+            required=True))
 
     module = AnsibleModule(argument_spec=module_args,
                            supports_check_mode=False)
