@@ -5,8 +5,11 @@ dependency:
 driver:
   name: docker
 
-lint:
-  name: yamllint
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+  flake8
 
 platforms:
   - name: ansible-role-visual-studio-code-ubuntu-max
@@ -14,17 +17,10 @@ platforms:
 
 provisioner:
   name: ansible
-  lint:
-    name: ansible-lint
   inventory:
     host_vars:
       instance:
         ansible_user: ansible
 
-scenario:
-  name: default
-
 verifier:
   name: testinfra
-  lint:
-    name: flake8

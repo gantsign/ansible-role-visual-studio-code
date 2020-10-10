@@ -1,5 +1,6 @@
 ---
 language: python
+python: '3.6'
 
 env:
   global:
@@ -12,51 +13,33 @@ jobs:
     - env:
         - MOLECULEW_ANSIBLE=2.8.16
         - MOLECULE_SCENARIO=centos
-      python: '2.7'
     - env:
         - MOLECULEW_ANSIBLE=2.8.16
         - MOLECULE_SCENARIO=default
-      python: '2.7'
     - env:
         - MOLECULEW_ANSIBLE=2.8.16
         - MOLECULE_SCENARIO=ubuntu-min
-      python: '2.7'
     - env:
         - MOLECULEW_ANSIBLE=2.8.16
         - MOLECULE_SCENARIO=fedora
-      python: '2.7'
     - env:
         - MOLECULEW_ANSIBLE=2.8.16
         - MOLECULE_SCENARIO=opensuse
-      python: '2.7'
-    - env:
-        - MOLECULEW_ANSIBLE=2.8.16
-        - MOLECULE_SCENARIO=python3
-      python: '3.6'
     - env:
         - MOLECULEW_ANSIBLE=2.9.1
         - MOLECULE_SCENARIO=centos
-      python: '2.7'
     - env:
         - MOLECULEW_ANSIBLE=2.9.1
         - MOLECULE_SCENARIO=default
-      python: '2.7'
     - env:
         - MOLECULEW_ANSIBLE=2.9.1
         - MOLECULE_SCENARIO=ubuntu-min
-      python: '2.7'
     - env:
         - MOLECULEW_ANSIBLE=2.9.1
         - MOLECULE_SCENARIO=fedora
-      python: '2.7'
     - env:
         - MOLECULEW_ANSIBLE=2.9.1
         - MOLECULE_SCENARIO=opensuse
-      python: '2.7'
-    - env:
-        - MOLECULEW_ANSIBLE=2.9.1
-        - MOLECULE_SCENARIO=python3
-      python: '3.6'
 
 # Require Ubuntu 16.04
 dist: xenial
