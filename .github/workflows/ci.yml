@@ -21,15 +21,15 @@ jobs:
       max-parallel: 3
       matrix:
         ansible-version:
-          - '2.8.16'
           - '2.9.1'
         molecule-scenario:
           - centos
           - default
-          - ubuntu-min
           - fedora
           - opensuse
-
+        include:
+          - ansible-version: '2.8.16'
+            molecule-scenario: ubuntu-min
     env:
       MOLECULEW_ANSIBLE: ${{ matrix.ansible-version }}
 
