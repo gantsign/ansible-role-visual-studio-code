@@ -13,7 +13,7 @@ lint: |
 
 platforms:
   - name: ansible-role-visual-studio-code-centos
-    image: centos:7
+    image: centos:8
 
 provisioner:
   name: ansible
