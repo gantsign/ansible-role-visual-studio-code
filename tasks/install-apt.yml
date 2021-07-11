@@ -12,6 +12,7 @@
       - libxcb-dri3-0
       - libdrm2
       - libgbm1
+      - libxshmfence1
     state: present
 
 - name: install key (apt)
