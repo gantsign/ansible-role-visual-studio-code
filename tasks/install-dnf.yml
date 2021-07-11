@@ -5,6 +5,7 @@
     name:
       - libdrm
       - libX11-xcb
+      - libxshmfence
       - mesa-libgbm
       - which
     state: present

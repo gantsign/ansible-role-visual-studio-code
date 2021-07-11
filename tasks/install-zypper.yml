@@ -6,6 +6,7 @@
       - libdrm2
       - libgbm1
       - libxcb-dri3-0
+      - libxshmfence1
       - which
     state: present
 
