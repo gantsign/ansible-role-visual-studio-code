@@ -24,7 +24,7 @@
 - name: install VS Code repo (apt)
   become: yes
   apt_repository:
-    repo: 'deb [arch=amd64] {{ visual_studio_code_mirror }}/repos/vscode stable main'
+    repo: 'deb [arch=amd64] {{ visual_studio_code_mirror }}/repos/code stable main'
     filename: vscode
     state: present
 
