@@ -12,8 +12,8 @@ lint: |
   flake8
 
 platforms:
-  - name: ansible-role-visual-studio-code-centos
-    image: centos:8
+  - name: ansible-role-visual-studio-code-rocky
+    image: rockylinux/rockylinux:8
 
 provisioner:
   name: ansible

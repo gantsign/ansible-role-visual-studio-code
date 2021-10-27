@@ -23,7 +23,7 @@ jobs:
         ansible-version:
           - '2.9.1'
         molecule-scenario:
-          - centos
+          - rocky
           - default
           - fedora
           - opensuse
