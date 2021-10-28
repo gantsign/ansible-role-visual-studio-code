@@ -15,7 +15,7 @@ galaxy_info:
         - focal
     - name: Fedora
       versions:
-        - 31
+        - 34
     - name: opensuse
       versions:
         - 15.1
