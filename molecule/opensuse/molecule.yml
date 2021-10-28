@@ -13,7 +13,7 @@ lint: |
 
 platforms:
   - name: ansible-role-visual-studio-code-opensuse
-    image: opensuse/leap:15.1
+    image: opensuse/leap:15.3
 
 provisioner:
   name: ansible
