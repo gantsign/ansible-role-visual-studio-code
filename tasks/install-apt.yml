@@ -21,12 +21,27 @@
     url: '{{ visual_studio_code_mirror }}/keys/microsoft.asc'
     state: present
 
+- name: check /etc/apt/sources.list.d/vscode.list exists
+  become: yes
+  stat:
+    path: /etc/apt/sources.list.d/vscode.list
+  register: vscode_list_file_stat_result
+
+- name: 'exists url {{ visual_studio_code_mirror }}/repos/code in /etc/apt/sources.list.d/vscode.list'
+  become: yes
+  command: cat /etc/apt/sources.list.d/vscode.list
+  register: cat_vscode_list
+  when: vscode_list_file_stat_result.stat.exists
+  changed_when: not vscode_list_file_stat_result.stat.exists
+
 - name: install VS Code repo (apt)
   become: yes
   apt_repository:
     repo: 'deb [arch=amd64] {{ visual_studio_code_mirror }}/repos/code stable main'
     filename: vscode
     state: present
+  when: not cat_vscode_list.stdout is defined or cat_vscode_list.stdout.find('/repos/code') != -1
+  changed_when: cat_vscode_list.stdout is defined and cat_vscode_list.stdout.find('/repos/code') == 0
 
 - name: install VS Code (apt)
   become: yes

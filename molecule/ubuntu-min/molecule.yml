@@ -19,7 +19,7 @@ platforms:
 provisioner:
   name: ansible
   playbooks:
-    converge: ../default/converge.yml
+    converge: ./converge.yml
   inventory:
     host_vars:
       instance:
