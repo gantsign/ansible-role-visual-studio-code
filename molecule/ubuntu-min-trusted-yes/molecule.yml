@@ -1,0 +1,30 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+  flake8
+
+platforms:
+  - name: ansible-role-visual-studio-code-ubuntu-min-trusted-yes
+    image: ubuntu:18.04
+    dockerfile: ../default/Dockerfile.j2
+
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ./converge.yml
+  inventory:
+    host_vars:
+      instance:
+        ansible_user: ansible
+
+verifier:
+  name: testinfra
+  directory: ./tests

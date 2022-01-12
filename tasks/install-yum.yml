@@ -13,7 +13,7 @@
     file: vscode
     baseurl: '{{ visual_studio_code_mirror }}/yumrepos/vscode'
     gpgkey: '{{ visual_studio_code_mirror }}/keys/microsoft.asc'
-    gpgcheck: yes
+    gpgcheck: '{{ visual_studio_code_gpgcheck }}'
   when: not visual_studio_code_skip_add_repo
 
 - name: install VS Code (yum)

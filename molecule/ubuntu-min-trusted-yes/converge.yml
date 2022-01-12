@@ -1,0 +1,35 @@
+---
+- name: Converge
+  hosts: all
+
+  pre_tasks:
+    - name: update apt cache
+      apt:
+        update_cache: yes
+      changed_when: no
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: install gnupg2 (apt)
+      become: yes
+      apt:
+        name: gnupg2
+        state: present
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: install extension cli dependencies (apt)
+      become: yes
+      apt:
+        name: libx11-xcb1
+        state: present
+      when: ansible_pkg_mgr == 'apt'
+
+  roles:
+    - role: ansible-role-visual-studio-code
+      visual_studio_code_gpgcheck: no
+
+  post_tasks:
+    - name: install which
+      package:
+        name: which
+        state: present
+      when: ansible_pkg_mgr in ('yum', 'dnf', 'zypper')
