@@ -1,0 +1,124 @@
+---
+- name: Converge
+  hosts: all
+
+  pre_tasks:
+    - name: create test users
+      become: yes
+      user:
+        name: '{{ item }}'
+        state: present
+        home: '/home/{{ item }}'
+        createhome: yes
+      with_items:
+        - test_usr
+        - test_usr2
+        - test_usr3
+        - test_usr4
+
+    - name: update apt cache
+      apt:
+        update_cache: yes
+      changed_when: no
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: install gnupg2 (apt)
+      become: yes
+      apt:
+        name: gnupg2
+        state: present
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: install extension cli dependencies (zypper)
+      become: yes
+      zypper:
+        name: libX11-xcb1
+        state: present
+      when: ansible_pkg_mgr == 'zypper'
+
+    - name: install extension cli dependencies (apt)
+      become: yes
+      apt:
+        name: libx11-xcb1
+        state: present
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: install key (apt)
+      become: yes
+      apt_key:
+        url: '{{ visual_studio_code_mirror }}/keys/microsoft.asc'
+        state: present
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: install VS Code repo (apt)
+      become: yes
+      apt_repository:
+        repo: 'deb [arch=amd64] {{ visual_studio_code_mirror }}/repos/code stable main'
+        filename: vscode
+        state: present
+      when: ansible_pkg_mgr == 'apt'
+
+    - name: create settings directory
+      become: yes
+      become_user: test_usr4
+      file:
+        path: /home/test_usr4/.config/Code/User
+        state: directory
+        mode: 'u=rwx,go='
+
+    - name: install default settings
+      become: yes
+      become_user: test_usr4
+      copy:
+        content: '{"remove_me": true}'
+        dest: /home/test_usr4/.config/Code/User/settings.json
+        mode: 'u=rw,go='
+
+  roles:
+    - role: ansible-role-visual-studio-code
+      visual_studio_code_skip_add_repo: yes
+      users:
+        - username: test_usr
+          visual_studio_code_extensions:
+            - ms-python.python
+            - wholroyd.jinja
+          visual_studio_code_settings: {
+            "editor.rulers": [80, 100, 120],
+            "editor.renderWhitespace": true,
+            "files.associations": {
+              "Vagrantfile": "ruby"
+            }
+          }
+        - username: test_usr2
+          visual_studio_code_extensions: []
+          visual_studio_code_settings: {}
+        - username: test_usr3
+        - username: test_usr4
+          visual_studio_code_settings: {}
+          visual_studio_code_settings_overwrite: yes
+    - role: ansible-role-visual-studio-code
+      visual_studio_code_skip_add_repo: yes
+      visual_studio_code_build: 'insiders'
+      users:
+        - username: test_usr
+          visual_studio_code_extensions:
+            - ms-python.python
+            - wholroyd.jinja
+          visual_studio_code_settings: {
+            "editor.rulers": [80, 100, 120],
+            "editor.renderWhitespace": true,
+            "files.associations": {
+              "Vagrantfile": "ruby"
+            }
+          }
+        - username: test_usr2
+          visual_studio_code_extensions: []
+          visual_studio_code_settings: {}
+        - username: test_usr3
+
+  post_tasks:
+    - name: install which
+      package:
+        name: which
+        state: present
+      when: ansible_pkg_mgr in ('yum', 'dnf', 'zypper')

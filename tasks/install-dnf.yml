@@ -19,6 +19,7 @@
     baseurl: '{{ visual_studio_code_mirror }}/yumrepos/vscode'
     gpgkey: '{{ visual_studio_code_mirror }}/keys/microsoft.asc'
     gpgcheck: yes
+  when: not visual_studio_code_skip_add_repo
 
 - name: install VS Code (dnf)
   become: yes

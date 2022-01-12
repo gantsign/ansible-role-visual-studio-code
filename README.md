@@ -58,6 +58,11 @@ visual_studio_code_build: stable
 # with a trailing slash.
 visual_studio_code_mirror: 'https://packages.microsoft.com'
 
+# skip task to add repo for remote package manager
+# if set to true, the task 'install VS Code repo (apt/yum/dnf/zypper)' will be skipped
+# if set to false, the repo will be added, this is the default
+visual_studio_code_skip_add_repo: false
+
 # Users to install extensions for and/or write settings.json
 users: []
 ```
