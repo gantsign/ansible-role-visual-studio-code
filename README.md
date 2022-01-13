@@ -29,7 +29,7 @@ Requirements
 
         * Fedora
 
-            * 34
+            * 35
 
     * SUSE Family
 
@@ -64,7 +64,7 @@ visual_studio_code_mirror: 'https://packages.microsoft.com'
 # - for dnf/yum the option gpgcheck is set to yes
 # - for zypper the option gpgcheck is set to 1
 # yes is the default
-# if no 
+# if no
 # - for apt repo the option trusted=yes is added to repo definition
 # - for dnf/yum the option gpgcheck is set to no
 # - for zypper the option gpgcheck is set to 0
