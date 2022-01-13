@@ -21,20 +21,10 @@
     url: '{{ visual_studio_code_mirror }}/keys/microsoft.asc'
     state: present
 
-- name: register empty variable trusted for gpgcheck
-  set_fact:
-    trusted: ''
-  when: visual_studio_code_gpgcheck
-
-- name: register variable trusted=yes for gpgcheck
-  set_fact:
-    trusted: 'trusted=yes'
-  when: not visual_studio_code_gpgcheck
-
 - name: install VS Code repo (apt)
   become: yes
   apt_repository:
-    repo: 'deb [arch=amd64 {{ trusted }}] {{ visual_studio_code_mirror }}/repos/code stable main'
+    repo: 'deb [arch=amd64 {{ visual_studio_code_gpgcheck | ternary("", "trusted=yes") }}] {{ visual_studio_code_mirror }}/repos/code stable main'
     filename: vscode
     state: present
   when: not visual_studio_code_skip_add_repo

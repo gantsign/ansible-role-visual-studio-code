@@ -16,16 +16,6 @@
     state: present
     key: '{{ visual_studio_code_mirror }}/keys/microsoft.asc'
 
-- name: register variable gpgcheck=1
-  set_fact:
-    gpgcheck_zypper: '1'
-  when: visual_studio_code_gpgcheck
-
-- name: register variable gpgcheck=0
-  set_fact:
-    gpgcheck_zypper: '0'
-  when: not visual_studio_code_gpgcheck
-
 - name: write repo configuration (zypper)
   become: yes
   template:
