@@ -14,7 +14,6 @@ lint: |
 platforms:
   - name: ansible-role-visual-studio-code-ubuntu-min-trusted-yes
     image: ubuntu:18.04
-    dockerfile: ../default/Dockerfile.j2
 
 provisioner:
   name: ansible
