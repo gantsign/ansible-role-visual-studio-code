@@ -4,5 +4,5 @@ name=Visual Studio Code
 baseurl={{ visual_studio_code_mirror }}/yumrepos/vscode
 enabled=1
 type=rpm-md
-gpgcheck=1
+gpgcheck={{ visual_studio_code_gpgcheck | ternary('1', '0') }}
 gpgkey={{ visual_studio_code_mirror }}/keys/microsoft.asc
