@@ -21,7 +21,7 @@ jobs:
       max-parallel: 3
       matrix:
         ansible-version:
-          - '2.9.1'
+          - '2.10.7' # max-ansible-test-version
         molecule-scenario:
           - rocky
           - default
