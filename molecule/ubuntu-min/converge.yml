@@ -89,13 +89,27 @@
               "Vagrantfile": "ruby"
             }
           }
+          visual_studio_code_keybindings: [
+            {
+              "key":     "ctrl+'",
+              "command": "workbench.action.terminal.focus"
+            },
+            {
+              "key":     "ctrl+'",
+              "command": "workbench.action.focusActiveEditorGroup",
+              "when":    "terminalFocus"
+            }
+          ]
         - username: test_usr2
           visual_studio_code_extensions: []
           visual_studio_code_settings: {}
+          visual_studio_code_keybindings: []
         - username: test_usr3
         - username: test_usr4
           visual_studio_code_settings: {}
           visual_studio_code_settings_overwrite: yes
+          visual_studio_code_keybindings: []
+          visual_studio_code_keybindings_overwrite: yes
     - role: ansible-role-visual-studio-code
       visual_studio_code_skip_add_repo: yes
       visual_studio_code_build: 'insiders'
@@ -111,9 +125,21 @@
               "Vagrantfile": "ruby"
             }
           }
+          visual_studio_code_keybindings: [
+            {
+              "key":     "ctrl+'",
+              "command": "workbench.action.terminal.focus"
+            },
+            {
+              "key":     "ctrl+'",
+              "command": "workbench.action.focusActiveEditorGroup",
+              "when":    "terminalFocus"
+            }
+          ]
         - username: test_usr2
           visual_studio_code_extensions: []
           visual_studio_code_settings: {}
+          visual_studio_code_keybindings: []
         - username: test_usr3
 
   post_tasks:
