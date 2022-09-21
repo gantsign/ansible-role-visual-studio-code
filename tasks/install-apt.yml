@@ -1,7 +1,7 @@
 ---
-- name: install dependencies (apt)
+- name: Install dependencies (apt)
   become: yes
-  apt:
+  ansible.builtin.apt:
     name:
       - ca-certificates
       - apt-transport-https
@@ -15,22 +15,59 @@
       - libxshmfence1
     state: present
 
-- name: install key (apt)
-  become: yes
-  apt_key:
-    url: '{{ visual_studio_code_mirror }}/keys/microsoft.asc'
-    state: present
+- name: Get distribution and codename
+  ansible.builtin.command: lsb_release -{{ item }}
+  register: result
+  with_items: ["is", "rs"]
+  changed_when: No
 
-- name: install VS Code repo (apt)
-  become: yes
-  apt_repository:
-    repo: 'deb [arch=amd64{{ visual_studio_code_gpgcheck | ternary("", " trusted=yes") }}] {{ visual_studio_code_mirror }}/repos/code stable main'
-    filename: vscode
-    state: present
-  when: not visual_studio_code_skip_add_repo
+- name: Define variables distro and release
+  ansible.builtin.set_fact:
+    distro: "{{ result.results[0].stdout }}"
+    release: "{{ result.results[1].stdout }}"
 
-- name: install VS Code (apt)
+- name: Install key (apt) and VS Code repo (apt)
+  block:
+    - name: Install key (apt)
+      become: yes
+      ansible.builtin.apt_key:
+        url: '{{ visual_studio_code_mirror }}/keys/microsoft.asc'
+        state: present
+
+    - name: Install VS Code repo (apt)
+      become: yes
+      ansible.builtin.apt_repository:
+        repo: 'deb [arch=amd64{{ visual_studio_code_gpgcheck | ternary("", " trusted=yes") }}] {{ visual_studio_code_mirror }}/repos/code stable main'
+        filename: vscode
+        state: present
+      when: not visual_studio_code_skip_add_repo
+  when: not ((distro == "Ubuntu" and release | float >= 22.04) or (distro == "Debian" and release | float >= 11))
+
+- name: Install key (gpg) and VS Code repo (apt)
+  block:
+    - name: Install key (gpg)
+      # noqa no-changed-when
+      become: yes
+      ansible.builtin.shell: https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | tee /usr/share/keyrings/packages.microsoft.gpg
+
+    - name: Remove old vscode.list if existing
+      tags: vscode
+      become: yes
+      ansible.builtin.file:
+        state: absent
+        path: /etc/apt/sources.list.d/vscode.list
+
+    - name: Install VS Code repo (apt)
+      become: yes
+      ansible.builtin.apt_repository:
+        repo: 'deb [arch=amd64{{ visual_studio_code_gpgcheck | ternary("", " trusted=yes") }}, signed-by=/usr/share/keyrings/packages.microsoft.gpg] {{ visual_studio_code_mirror }}/repos/code stable main'
+        filename: vscode
+        state: present
+      when: not visual_studio_code_skip_add_repo
+  when: (distro == "Ubuntu" and release | float >= 22.04) or (distro == "Debian" and release | float >= 11)
+
+- name: Install VS Code (apt)
   become: yes
-  apt:
+  ansible.builtin.apt:
     name: "{{ visual_studio_code_package }}{{ (visual_studio_code_version | length > 0) | ternary('=' + visual_studio_code_version, '') }}"
     state: present
