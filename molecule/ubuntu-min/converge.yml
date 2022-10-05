@@ -75,6 +75,15 @@
         force: no
         mode: 'u=rw,go='
 
+    - name: install default key bindings
+      become: yes
+      become_user: test_usr4
+      copy:
+        content: '[{"key":"ctrl+r","command": "remove_me"}]'
+        dest: /home/test_usr4/.config/Code/User/keybindings.json
+        force: no
+        mode: 'u=rw,go='
+
   roles:
     - role: ansible-role-visual-studio-code
       visual_studio_code_skip_add_repo: yes
