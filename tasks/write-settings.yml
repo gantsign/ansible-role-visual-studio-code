@@ -54,4 +54,7 @@
   loop_control:
     loop_var: user
     label: '{{ user.username }}'
-  when: "user.visual_studio_code_keybindings is defined and user.visual_studio_code_keybindings not in ([], '', None, omit)"
+  when: >-
+    (user.visual_studio_code_keybindings_overwrite | default(False) | bool)
+    or (user.visual_studio_code_keybindings is defined
+    and user.visual_studio_code_keybindings not in ([], '', None, omit))
