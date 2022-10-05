@@ -89,6 +89,8 @@ users:
       - # extension 2
     visual_studio_code_settings_overwrite: # Overwrite the settings file if it exists. Options: boolean "yes" or "no" (defaults to "no").
     visual_studio_code_settings: # JSON object
+    visual_studio_code_keybindings_overwrite: # Overwrite the keybindings file if it exists. Options: boolean "yes" or "no" (defaults to "no").
+    visual_studio_code_keybindings: # JSON object
 ```
 
 Example Playbooks
@@ -102,7 +104,7 @@ Minimal playbook:
     - role: gantsign.visual-studio-code
 ```
 
-Playbook with extensions installed that overwrites settings:
+Playbook with extensions installed that overwrites settings and keybindings:
 
 ```yaml
 - hosts: servers
@@ -122,6 +124,18 @@ Playbook with extensions installed that overwrites settings:
               "Vagrantfile": "ruby"
             }
           }
+          visual_studio_code_keybindings_overwrite: yes
+          visual_studio_code_keybindings: [
+            {
+              "key":     "ctrl+'",
+              "command": "workbench.action.terminal.focus"
+            },
+            {
+              "key":     "ctrl+'",
+              "command": "workbench.action.focusActiveEditorGroup",
+              "when":    "terminalFocus"
+            }
+          ]
 ```
 
 More Roles From GantSign
