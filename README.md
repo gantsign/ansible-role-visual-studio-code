@@ -90,7 +90,7 @@ users:
     visual_studio_code_settings_overwrite: # Overwrite the settings file if it exists. Options: boolean "yes" or "no" (defaults to "no").
     visual_studio_code_settings: # JSON object
     visual_studio_code_keybindings_overwrite: # Overwrite the keybindings file if it exists. Options: boolean "yes" or "no" (defaults to "no").
-    visual_studio_code_keybindings: # JSON object
+    visual_studio_code_keybindings: # JSON array
 ```
 
 Example Playbooks
