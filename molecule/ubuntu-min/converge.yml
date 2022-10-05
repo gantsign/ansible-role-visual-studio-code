@@ -72,6 +72,7 @@
       copy:
         content: '{"remove_me": true}'
         dest: /home/test_usr4/.config/Code/User/settings.json
+        force: no
         mode: 'u=rw,go='
 
   roles:

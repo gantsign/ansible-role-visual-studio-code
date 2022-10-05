@@ -1,2 +1,6 @@
 // Place your settings in this file to overwrite the default settings
+{% if user.visual_studio_code_settings is mapping -%}
 {{ user.visual_studio_code_settings | to_nice_json }}
+{% else -%}
+{{ '{}' }}
+{% endif -%}

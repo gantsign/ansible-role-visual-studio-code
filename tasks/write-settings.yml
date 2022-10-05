@@ -37,4 +37,7 @@
   loop_control:
     loop_var: user
     label: '{{ user.username }}'
-  when: "user.visual_studio_code_settings is defined and user.visual_studio_code_settings not in ({}, '', None, omit)"
+  when: >-
+    (user.visual_studio_code_settings_overwrite | default(False) | bool)
+    or (user.visual_studio_code_settings is defined
+    and user.visual_studio_code_settings not in ({}, '', None, omit))
