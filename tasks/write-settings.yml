@@ -41,3 +41,20 @@
     (user.visual_studio_code_settings_overwrite | default(False) | bool)
     or (user.visual_studio_code_settings is defined
     and user.visual_studio_code_settings not in ({}, '', None, omit))
+
+- name: write keybindings
+  become: yes
+  become_user: '{{ user.username }}'
+  template:
+    src: keybindings.json.j2
+    dest: '~{{ user.username }}/{{ visual_studio_code_config_path }}/User/keybindings.json'
+    force: '{{ user.visual_studio_code_keybindings_overwrite | default(False) | bool }}'
+    mode: 'u=rw,go='
+  with_items: '{{ users }}'
+  loop_control:
+    loop_var: user
+    label: '{{ user.username }}'
+  when: >-
+    (user.visual_studio_code_keybindings_overwrite | default(False) | bool)
+    or (user.visual_studio_code_keybindings is defined
+    and user.visual_studio_code_keybindings not in ([], '', None, omit))

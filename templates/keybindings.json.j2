@@ -1,0 +1,6 @@
+// Place your key bindings in this file to override the defaults
+{% if user.visual_studio_code_keybindings is iterable -%}
+{{ user.visual_studio_code_keybindings | to_nice_json }}
+{% else -%}
+{{ '[]' }}
+{% endif -%}
