@@ -28,7 +28,7 @@ jobs:
           - fedora
           - opensuse
         include:
-          - ansible-version: '2.9.26' # min-ansible-test-version
+          - ansible-version: '2.10.7' # min-ansible-test-version
             molecule-scenario: ubuntu-min
     env:
       MOLECULEW_ANSIBLE: ${{ matrix.ansible-version }}
