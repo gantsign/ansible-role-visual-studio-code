@@ -1,5 +1,5 @@
 ---
-- name: install extensions
+- name: Install extensions
   become: yes
   become_user: '{{ item.0.username }}'
   visual_studio_code_install_extension:

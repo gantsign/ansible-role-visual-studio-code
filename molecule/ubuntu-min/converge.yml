@@ -3,9 +3,9 @@
   hosts: all
 
   pre_tasks:
-    - name: create test users
+    - name: Create test users
       become: yes
-      user:
+      ansible.builtin.user:
         name: '{{ item }}'
         state: present
         home: '/home/{{ item }}'
@@ -16,69 +16,69 @@
         - test_usr3
         - test_usr4
 
-    - name: update apt cache
-      apt:
+    - name: Update apt cache
+      ansible.builtin.apt:
         update_cache: yes
       changed_when: no
       when: ansible_pkg_mgr == 'apt'
 
-    - name: install gnupg2 (apt)
+    - name: Install gnupg2 (apt)
       become: yes
-      apt:
+      ansible.builtin.apt:
         name: gnupg2
         state: present
       when: ansible_pkg_mgr == 'apt'
 
-    - name: install extension cli dependencies (zypper)
+    - name: Install extension cli dependencies (zypper)
       become: yes
-      zypper:
+      community.general.zypper:
         name: libX11-xcb1
         state: present
       when: ansible_pkg_mgr == 'zypper'
 
-    - name: install extension cli dependencies (apt)
+    - name: Install extension cli dependencies (apt)
       become: yes
-      apt:
+      ansible.builtin.apt:
         name: libx11-xcb1
         state: present
       when: ansible_pkg_mgr == 'apt'
 
-    - name: install key (apt)
+    - name: Install key (apt)
       become: yes
-      apt_key:
+      ansible.builtin.apt_key:
         url: '{{ visual_studio_code_mirror }}/keys/microsoft.asc'
         state: present
       when: ansible_pkg_mgr == 'apt'
 
-    - name: install VS Code repo (apt)
+    - name: Install VS Code repo (apt)
       become: yes
-      apt_repository:
+      ansible.builtin.apt_repository:
         repo: 'deb [arch=amd64] {{ visual_studio_code_mirror }}/repos/code stable main'
         filename: vscode
         state: present
       when: ansible_pkg_mgr == 'apt'
 
-    - name: create settings directory
+    - name: Create settings directory
       become: yes
       become_user: test_usr4
-      file:
+      ansible.builtin.file:
         path: /home/test_usr4/.config/Code/User
         state: directory
         mode: 'u=rwx,go='
 
-    - name: install default settings
+    - name: Install default settings
       become: yes
       become_user: test_usr4
-      copy:
+      ansible.builtin.copy:
         content: '{"remove_me": true}'
         dest: /home/test_usr4/.config/Code/User/settings.json
         force: no
         mode: 'u=rw,go='
 
-    - name: install default key bindings
+    - name: Install default key bindings
       become: yes
       become_user: test_usr4
-      copy:
+      ansible.builtin.copy:
         content: '[{"key":"ctrl+r","command": "remove_me"}]'
         dest: /home/test_usr4/.config/Code/User/keybindings.json
         force: no
@@ -153,8 +153,8 @@
         - username: test_usr3
 
   post_tasks:
-    - name: install which
-      package:
+    - name: Install which
+      ansible.builtin.package:
         name: which
         state: present
       when: ansible_pkg_mgr in ('yum', 'dnf', 'zypper')

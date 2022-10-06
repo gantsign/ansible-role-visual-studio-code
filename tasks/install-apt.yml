@@ -1,7 +1,7 @@
 ---
-- name: install dependencies (apt)
+- name: Install dependencies (apt)
   become: yes
-  apt:
+  ansible.builtin.apt:
     name:
       - ca-certificates
       - apt-transport-https
@@ -15,22 +15,22 @@
       - libxshmfence1
     state: present
 
-- name: install key (apt)
+- name: Install key (apt)
   become: yes
-  apt_key:
+  ansible.builtin.apt_key:
     url: '{{ visual_studio_code_mirror }}/keys/microsoft.asc'
     state: present
 
-- name: install VS Code repo (apt)
+- name: Install VS Code repo (apt)
   become: yes
-  apt_repository:
+  ansible.builtin.apt_repository:
     repo: 'deb [arch=amd64{{ visual_studio_code_gpgcheck | ternary("", " trusted=yes") }}] {{ visual_studio_code_mirror }}/repos/code stable main'
     filename: vscode
     state: present
   when: not visual_studio_code_skip_add_repo
 
-- name: install VS Code (apt)
+- name: Install VS Code (apt)
   become: yes
-  apt:
+  ansible.builtin.apt:
     name: "{{ visual_studio_code_package }}{{ (visual_studio_code_version | length > 0) | ternary('=' + visual_studio_code_version, '') }}"
     state: present

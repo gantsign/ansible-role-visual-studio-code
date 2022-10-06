@@ -1,8 +1,8 @@
 ---
-- name: create config directories for users
+- name: Create config directories for users
   become: yes
   become_user: '{{ user.username }}'
-  file:
+  ansible.builtin.file:
     path: '~{{ user.username }}/{{ visual_studio_code_config_path }}'
     state: directory
     mode: 'u=rwx,go=rx'
@@ -12,10 +12,10 @@
     label: '{{ user.username }}'
   when: "user.visual_studio_code_settings is defined and user.visual_studio_code_settings not in ({}, '', None, omit)"
 
-- name: create settings directory
+- name: Create settings directory
   become: yes
   become_user: '{{ user.username }}'
-  file:
+  ansible.builtin.file:
     path: '~{{ user.username }}/{{ visual_studio_code_config_path }}/User'
     state: directory
     mode: 'u=rwx,go='
@@ -25,10 +25,10 @@
     label: '{{ user.username }}'
   when: "user.visual_studio_code_settings is defined and user.visual_studio_code_settings not in ({}, '', None, omit)"
 
-- name: write settings
+- name: Write settings
   become: yes
   become_user: '{{ user.username }}'
-  template:
+  ansible.builtin.template:
     src: settings.json.j2
     dest: '~{{ user.username }}/{{ visual_studio_code_config_path }}/User/settings.json'
     force: '{{ user.visual_studio_code_settings_overwrite | default(False) | bool }}'
@@ -42,10 +42,10 @@
     or (user.visual_studio_code_settings is defined
     and user.visual_studio_code_settings not in ({}, '', None, omit))
 
-- name: write keybindings
+- name: Write keybindings
   become: yes
   become_user: '{{ user.username }}'
-  template:
+  ansible.builtin.template:
     src: keybindings.json.j2
     dest: '~{{ user.username }}/{{ visual_studio_code_config_path }}/User/keybindings.json'
     force: '{{ user.visual_studio_code_keybindings_overwrite | default(False) | bool }}'
