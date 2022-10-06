@@ -1,13 +1,13 @@
 ---
-- name: install dependencies (yum)
+- name: Install dependencies (yum)
   become: yes
-  yum:
+  ansible.builtin.yum:
     name: which
     state: present
 
-- name: install VS Code repo (yum)
+- name: Install VS Code repo (yum)
   become: yes
-  yum_repository:
+  ansible.builtin.yum_repository:
     name: code
     description: Visual Studio Code repo
     file: vscode
@@ -16,8 +16,8 @@
     gpgcheck: '{{ visual_studio_code_gpgcheck }}'
   when: not visual_studio_code_skip_add_repo
 
-- name: install VS Code (yum)
+- name: Install VS Code (yum)
   become: yes
-  yum:
+  ansible.builtin.yum:
     name: "{{ visual_studio_code_package }}{{ (visual_studio_code_version | length > 0) | ternary('-' + visual_studio_code_version, '') }}"
     state: present

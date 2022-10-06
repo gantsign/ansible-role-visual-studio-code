@@ -1,7 +1,7 @@
 ---
-- name: install dependencies (dnf)
+- name: Install dependencies (dnf)
   become: yes
-  dnf:
+  ansible.builtin.dnf:
     name:
       - libdrm
       - libX11-xcb
@@ -10,9 +10,9 @@
       - which
     state: present
 
-- name: install VS Code repo (dnf)
+- name: Install VS Code repo (dnf)
   become: yes
-  yum_repository:
+  ansible.builtin.yum_repository:
     name: code
     description: Visual Studio Code repo
     file: vscode
@@ -21,8 +21,8 @@
     gpgcheck: '{{ visual_studio_code_gpgcheck }}'
   when: not visual_studio_code_skip_add_repo
 
-- name: install VS Code (dnf)
+- name: Install VS Code (dnf)
   become: yes
-  dnf:
+  ansible.builtin.dnf:
     name: "{{ visual_studio_code_package }}{{ (visual_studio_code_version | length > 0) | ternary('-' + visual_studio_code_version, '') }}"
     state: present

@@ -3,9 +3,9 @@
   hosts: all
 
   pre_tasks:
-    - name: create test users
+    - name: Create test users
       become: yes
-      user:
+      ansible.builtin.user:
         name: '{{ item }}'
         state: present
         home: '/home/{{ item }}'
@@ -15,29 +15,29 @@
         - test_usr2
         - test_usr3
 
-    - name: update apt cache
-      apt:
+    - name: Update apt cache
+      ansible.builtin.apt:
         update_cache: yes
       changed_when: no
       when: ansible_pkg_mgr == 'apt'
 
-    - name: install gnupg2 (apt)
+    - name: Install gnupg2 (apt)
       become: yes
-      apt:
+      ansible.builtin.apt:
         name: gnupg2
         state: present
       when: ansible_pkg_mgr == 'apt'
 
-    - name: install extension cli dependencies (zypper)
+    - name: Install extension cli dependencies (zypper)
       become: yes
-      zypper:
+      community.general.zypper:
         name: libX11-xcb1
         state: present
       when: ansible_pkg_mgr == 'zypper'
 
-    - name: install extension cli dependencies (apt)
+    - name: Install extension cli dependencies (apt)
       become: yes
-      apt:
+      ansible.builtin.apt:
         name: libx11-xcb1
         state: present
       when: ansible_pkg_mgr == 'apt'
@@ -74,8 +74,8 @@
         - username: test_usr3
 
   post_tasks:
-    - name: install which
-      package:
+    - name: Install which
+      ansible.builtin.package:
         name: which
         state: present
       when: ansible_pkg_mgr in ('yum', 'dnf', 'zypper')

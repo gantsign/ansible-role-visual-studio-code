@@ -4,21 +4,21 @@ galaxy_info:
   description: Role for installing the Visual Studio Code IDE.
   company: GantSign Ltd.
   license: MIT
-  min_ansible_version: 2.10
+  min_ansible_version: '2.10'
   platforms:
     - name: EL
       versions:
-        - 8
+        - '8'
     - name: Ubuntu
       versions:
         - bionic
         - focal
     - name: Fedora
       versions:
-        - 35
+        - '35'
     - name: opensuse
       versions:
-        - 15.3
+        - '15.3'
   galaxy_tags:
     - code
     - editor
