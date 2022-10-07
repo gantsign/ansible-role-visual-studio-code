@@ -21,14 +21,14 @@ jobs:
       max-parallel: 3
       matrix:
         ansible-version:
-          - '2.10.7' # max-ansible-test-version
+          - '6.4.0' # max-ansible-test-version
         molecule-scenario:
           - rocky
           - default
           - fedora
           - opensuse
         include:
-          - ansible-version: '2.10.7' # min-ansible-test-version
+          - ansible-version: '5.10.0' # min-ansible-test-version
             molecule-scenario: ubuntu-min
     env:
       MOLECULEW_ANSIBLE: ${{ matrix.ansible-version }}
