@@ -1,15 +1,4 @@
 ---
-vars:
-  deb_architecture: {
-    "armv6l": "armhf",
-    "armv6l": "armhf",
-    "armv7l": "armhf",
-    "aarch64": "arm64",
-    "arm64": "arm64",
-    "x86_64": "amd64",
-    "amd64": "amd64"
-  }
-tasks:
 - name: Install dependencies (apt)
   become: yes
   ansible.builtin.apt:
@@ -41,15 +30,11 @@ tasks:
     mode: 'u=rw,go=r'
     force: yes
 
-- name: Show detected system architecture \"ansible_architecture\"
-  ansible.builtin.debug:
-    msg: "{{ [ansible_architecture] | map('extract', deb_architecture) | first }}"
-
 - name: Install VS Code repo (apt)
   become: yes
   ansible.builtin.apt_repository:
     repo: >-
-      deb [arch={{ [ansible_architecture] | map('extract', deb_architecture) | first }}
+      deb [arch={{ visual_studio_code_deb_architecture }}
       {{ visual_studio_code_gpgcheck | ternary("", " trusted=yes") }}
       signed-by=/etc/apt/keyrings/microsoft.asc]
       {{ visual_studio_code_mirror }}/repos/code stable main
