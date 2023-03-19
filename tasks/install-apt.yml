@@ -34,7 +34,8 @@
   become: yes
   ansible.builtin.apt_repository:
     repo: >-
-      deb [arch=amd64{{ visual_studio_code_gpgcheck | ternary("", " trusted=yes") }}
+      deb [arch={{ visual_studio_code_deb_architecture }}
+      {{ visual_studio_code_gpgcheck | ternary("", " trusted=yes") }}
       signed-by=/etc/apt/keyrings/microsoft.asc]
       {{ visual_studio_code_mirror }}/repos/code stable main
     filename: vscode

@@ -1,0 +1,31 @@
+---
+dependency:
+  name: galaxy
+
+driver:
+  name: docker
+
+role_name_check: 2
+
+lint: |
+  set -e
+  yamllint .
+  ansible-lint
+  flake8
+
+platforms:
+  - name: ansible-role-visual-studio-code-ubuntu-arm64
+    image: arm64v8/ubuntu:22.04
+
+provisioner:
+  name: ansible
+  playbooks:
+    converge: ../code-only/converge.yml
+  inventory:
+    host_vars:
+      instance:
+        ansible_user: ansible
+
+verifier:
+  name: testinfra
+  directory: ../code-only/tests
