@@ -10,3 +10,13 @@ visual_studio_code_package: "{{ (visual_studio_code_build == 'insiders') | terna
 
 # The CLI executable
 visual_studio_code_exe: "{{ (visual_studio_code_build == 'insiders') | ternary('code-insiders', 'code') }}"
+
+# Ansible architecture to deb architecture mapping
+visual_studio_code_deb_architecture_mapping:
+  armv6l: armhf
+  armv7l: armhf
+  aarch64: arm64
+
+# The architecture of the deb to install
+visual_studio_code_deb_architecture: >-
+  {{ visual_studio_code_deb_architecture_mapping[ansible_architecture | lower] | default('amd64') }}

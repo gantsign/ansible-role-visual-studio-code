@@ -20,6 +20,8 @@ jobs:
     strategy:
       max-parallel: 3
       matrix:
+        architecture:
+          - amd64
         ansible-version:
           - '6.4.0' # max-ansible-test-version
         molecule-scenario:
@@ -28,8 +30,16 @@ jobs:
           - fedora
           - opensuse
         include:
-          - ansible-version: '5.10.0' # min-ansible-test-version
+          - architecture: amd64
+            ansible-version: '5.10.0' # min-ansible-test-version
             molecule-scenario: ubuntu-min
+          - architecture: arm
+            ansible-version: '6.4.0' # max-ansible-test-version
+            molecule-scenario: ubuntu-arm32
+          # Disabled for taking too long
+          # - architecture: arm64
+          #   ansible-version: '6.4.0' # max-ansible-test-version
+          #   molecule-scenario: ubuntu-arm64
     env:
       MOLECULEW_ANSIBLE: ${{ matrix.ansible-version }}
 
@@ -55,6 +65,14 @@ jobs:
 
       - name: Dependency versions
         run: ./moleculew wrapper-versions
+
+      - name: Set up QEMU
+        if: matrix.architecture != 'amd64'
+        id: qemu
+        uses: docker/setup-qemu-action@v1
+        with:
+          image: tonistiigi/binfmt:latest
+          platforms: ${{ matrix.architecture }}
 
       - name: Login to Docker Hub
         if: '!github.event.pull_request || github.event.pull_request.head.repo.full_name == github.repository'
