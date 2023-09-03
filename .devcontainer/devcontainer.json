@@ -1,0 +1,28 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/python
+{
+	"name": "ansible-role-visual-studio-code",
+	"image": "ghcr.io/gantsign/devcontainer-python3.9:latest",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"DavidAnson.vscode-markdownlint",
+				"donjayamanne.githistory",
+				"EditorConfig.EditorConfig",
+				"github.vscode-github-actions",
+				"GitHub.vscode-pull-request-github",
+				"ldez.ignore-files",
+				"me-dutour-mathieu.vscode-github-actions",
+				"mhutchie.git-graph",
+				"oderwat.indent-rainbow",
+				"redhat.ansible",
+				"streetsidesoftware.code-spell-checker",
+				"wholroyd.jinja"
+			]
+		}
+	},
+	"remoteEnv": {
+		"PATH": "/home/vscode/.local/bin:${containerEnv:PATH}"
+	},
+	"postCreateCommand": "pip3 install --user -r requirements/dev.txt"
+}

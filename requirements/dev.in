@@ -1,0 +1,4 @@
+-r ansible-max.in
+-r lint.in
+-r tox.in
+pip-tools==6.13.0
