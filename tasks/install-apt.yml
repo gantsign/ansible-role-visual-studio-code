@@ -5,14 +5,6 @@
     name:
       - ca-certificates
       - apt-transport-https
-      - gconf2
-      - libasound2
-      - libgtk2.0-0
-      - libxss1
-      - libxcb-dri3-0
-      - libdrm2
-      - libgbm1
-      - libxshmfence1
     state: present
 
 - name: Create APT keyrings dir
