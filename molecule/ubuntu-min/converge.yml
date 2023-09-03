@@ -23,38 +23,30 @@
       changed_when: false
       when: ansible_pkg_mgr == 'apt'
 
-    - name: Install gnupg2 (apt)
+    - name: Create APT keyrings dir
       become: true
-      ansible.builtin.apt:
-        name: gnupg2
-        state: present
-      when: ansible_pkg_mgr == 'apt'
-
-    - name: Install extension cli dependencies (zypper)
-      become: true
-      ansible.builtin.package:
-        name: libX11-xcb1
-        state: present
-      when: ansible_pkg_mgr == 'zypper'
-
-    - name: Install extension cli dependencies (apt)
-      become: true
-      ansible.builtin.apt:
-        name: libx11-xcb1
-        state: present
+      ansible.builtin.file:
+        path: '/etc/apt/keyrings'
+        state: directory
+        mode: 'u=rwx,go=rx'
       when: ansible_pkg_mgr == 'apt'
 
     - name: Install key (apt)
       become: true
-      ansible.builtin.apt_key:
+      ansible.builtin.get_url:
         url: '{{ visual_studio_code_mirror }}/keys/microsoft.asc'
-        state: present
+        dest: '/etc/apt/keyrings/'
+        mode: 'u=rw,go=r'
+        force: true
       when: ansible_pkg_mgr == 'apt'
 
     - name: Install VS Code repo (apt)
       become: true
       ansible.builtin.apt_repository:
-        repo: 'deb [arch=amd64] {{ visual_studio_code_mirror }}/repos/code stable main'
+        repo: >-
+          deb [arch={{ visual_studio_code_deb_architecture }}
+          signed-by=/etc/apt/keyrings/microsoft.asc]
+          {{ visual_studio_code_mirror }}/repos/code stable main
         filename: vscode
         state: present
       when: ansible_pkg_mgr == 'apt'

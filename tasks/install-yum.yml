@@ -1,11 +1,5 @@
 # code: language=ansible
 ---
-- name: Install dependencies (yum)
-  become: true
-  ansible.builtin.yum:
-    name: which
-    state: present
-
 - name: Install VS Code repo (yum)
   become: true
   ansible.builtin.yum_repository:

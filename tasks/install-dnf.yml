@@ -1,16 +1,5 @@
 # code: language=ansible
 ---
-- name: Install dependencies (dnf)
-  become: true
-  ansible.builtin.dnf:
-    name:
-      - libdrm
-      - libX11-xcb
-      - libxshmfence
-      - mesa-libgbm
-      - which
-    state: present
-
 - name: Install VS Code repo (dnf)
   become: true
   ansible.builtin.yum_repository:
