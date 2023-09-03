@@ -1,3 +1,4 @@
+# code: language=ansible
 ---
 - name: Create config directories for users
   become: true

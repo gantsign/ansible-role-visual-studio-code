@@ -1,3 +1,4 @@
+# code: language=ansible
 ---
 # Visual Studio Code version number (defaults to the latest version)
 visual_studio_code_version: ''
