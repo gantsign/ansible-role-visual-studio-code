@@ -32,3 +32,7 @@ rules:
   trailing-spaces: disable
   truthy:
     allowed-values: ['true', 'false', 'on']
+
+ignore: |
+  .tox/
+  .venv/

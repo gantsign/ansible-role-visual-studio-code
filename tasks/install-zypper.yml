@@ -1,7 +1,7 @@
 ---
 - name: Install dependencies (zypper)
   become: true
-  community.general.zypper:
+  ansible.builtin.package:
     name:
       - libdrm2
       - libgbm1
@@ -28,6 +28,6 @@
 
 - name: Install VS Code (zypper)
   become: true
-  community.general.zypper:
+  ansible.builtin.package:
     name: "{{ visual_studio_code_package }}{{ (visual_studio_code_version | length > 0) | ternary('=' + visual_studio_code_version, '') }}"
     state: present

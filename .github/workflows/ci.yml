@@ -8,11 +8,51 @@ on:
   pull_request: {}
 
 env:
-  MOLECULEW_USE_SYSTEM: 'true'
   PY_COLORS: '1'
-  ANSIBLE_FORCE_COLOR: '1'
 
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        id: setup-python
+        uses: actions/setup-python@v4
+        with:
+          python-version-file: '.python-version'
+
+      - name: Tox cache
+        id: tox-cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: tox-${{ hashFiles('requirements/tox.txt') }}-py${{ steps.setup-python.outputs.python-version}}
+
+      - name: Lint cache
+        id: lint-cache
+        uses: actions/cache@v3
+        with:
+          path: .tox
+          key: lint-${{ hashFiles('requirements/lint.txt') }}-py${{ steps.setup-python.outputs.python-version}}
+
+      - name: Install tox
+        run: pip3 install --no-compile -r requirements/tox.txt
+
+      - name: Lint
+        run: tox --colored=yes run -e lint
+
+      - name: Compact lint cache
+        if: steps.lint-cache.outputs.cache-hit != 'true'
+        run: find .tox -name '__pycache__' -exec rm -rf {} +
+
+      - name: Compact tox cache
+        if: steps.tox-cache.outputs.cache-hit != 'true'
+        run: find ~/.cache/pip -name '__pycache__' -exec rm -rf {} +
+
   test:
     name: Molecule test
     runs-on: ubuntu-20.04
@@ -23,7 +63,7 @@ jobs:
         architecture:
           - amd64
         ansible-version:
-          - '6.4.0' # max-ansible-test-version
+          - max
         molecule-scenario:
           - rocky
           - default
@@ -31,14 +71,14 @@ jobs:
           - opensuse
         include:
           - architecture: amd64
-            ansible-version: '5.10.0' # min-ansible-test-version
+            ansible-version: min
             molecule-scenario: ubuntu-min
           - architecture: arm
-            ansible-version: '6.4.0' # max-ansible-test-version
+            ansible-version: max
             molecule-scenario: ubuntu-arm32
           # Disabled for taking too long
           # - architecture: arm64
-          #   ansible-version: '6.4.0' # max-ansible-test-version
+          #   ansible-version: max
           #   molecule-scenario: ubuntu-arm64
     env:
       MOLECULEW_ANSIBLE: ${{ matrix.ansible-version }}
@@ -48,23 +88,24 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Set up Python
+        id: setup-python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.8'
+          python-version-file: '.python-version'
 
-      - name: Cache Molecule
+      - name: Tox cache
+        id: tox-cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: tox-${{ hashFiles('requirements/tox.txt') }}-py${{ steps.setup-python.outputs.python-version}}
+
+      - name: Molecule cache
         id: molecule-cache
         uses: actions/cache@v3
         with:
-          path: ~/.moleculew
-          key: Ansible-${{ matrix.ansible-version }}-${{ hashFiles('.moleculew/**') }}
-
-      - name: Install dependencies
-        if: steps.molecule-cache.outputs.cache-hit != 'true'
-        run: ./moleculew wrapper-install
-
-      - name: Dependency versions
-        run: ./moleculew wrapper-versions
+          path: .tox
+          key: molecule-${{ hashFiles(format('requirements/ansible-{0}.txt', matrix.ansible-version)) }}-py${{ steps.setup-python.outputs.python-version}}
 
       - name: Set up QEMU
         if: matrix.architecture != 'amd64'
@@ -74,6 +115,9 @@ jobs:
           image: tonistiigi/binfmt:latest
           platforms: ${{ matrix.architecture }}
 
+      - name: Install tox
+        run: pip3 install --no-compile -r requirements/tox.txt
+
       - name: Login to Docker Hub
         if: '!github.event.pull_request || github.event.pull_request.head.repo.full_name == github.repository'
         uses: docker/login-action@v2
@@ -82,17 +126,23 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Molecule test
-        run: ./moleculew test --scenario-name=${{ matrix.molecule-scenario }}
+        run: tox --colored=yes run -e ansible-${{ matrix.ansible-version }} -- --scenario-name=${{ matrix.molecule-scenario }}
 
-      - name: Compact cache
+      - name: Compact Molecule cache
         if: steps.molecule-cache.outputs.cache-hit != 'true'
-        run: find ~/.moleculew -name '__pycache__' -exec rm -rf {} +
+        run: find .tox -name '__pycache__' -exec rm -rf {} +
+
+      - name: Compact tox cache
+        if: steps.tox-cache.outputs.cache-hit != 'true'
+        run: find ~/.cache/pip -name '__pycache__' -exec rm -rf {} +
 
   test-all:
     if: ${{ always() }}
     name: Test (matrix)
     runs-on: ubuntu-20.04
-    needs: test
+    needs:
+      - lint
+      - test
     steps:
       - name: Check test matrix status
         run: "[[ '${{ needs.test.result }}' == 'success' ]] || exit 1"

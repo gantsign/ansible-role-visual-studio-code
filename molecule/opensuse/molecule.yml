@@ -7,12 +7,6 @@ driver:
 
 role_name_check: 2
 
-lint: |
-  set -e
-  yamllint .
-  ansible-lint
-  flake8
-
 platforms:
   - name: ansible-role-visual-studio-code-opensuse
     image: opensuse/leap:15.3

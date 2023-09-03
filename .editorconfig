@@ -11,9 +11,17 @@ indent_size = 4
 trim_trailing_whitespace = true
 
 # Files with a smaller indent
-[*.yml]
+[*.{md,yml}]
+indent_size = 2
+
+# Ansible Lint
+[.ansible-lint]
 indent_size = 2
 
 # Jinja2 template files
 [*.j2]
 end_of_line = lf
+
+# Devcontainer config
+[devcontainer.json]
+indent_style = tab

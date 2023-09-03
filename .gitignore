@@ -171,7 +171,7 @@ fabric.properties
 
 # *.iml
 # modules.xml
-# .idea/misc.xml 
+# .idea/misc.xml
 # *.ipr
 
 
@@ -243,8 +243,15 @@ local.properties
 ### Custom rules ###
 ####################
 
-### Molecule ### 
+### Molecule ###
 
 __pycache__
 .cache
 .molecule
+
+
+### Tox ###
+.tox
+
+### For development ###
+.venv

@@ -31,7 +31,7 @@
 
     - name: Install extension cli dependencies (zypper)
       become: true
-      community.general.zypper:
+      ansible.builtin.package:
         name: libX11-xcb1
         state: present
       when: ansible_pkg_mgr == 'zypper'
