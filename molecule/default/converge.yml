@@ -4,12 +4,12 @@
 
   pre_tasks:
     - name: Create test users
-      become: yes
+      become: true
       ansible.builtin.user:
         name: '{{ item }}'
         state: present
         home: '/home/{{ item }}'
-        createhome: yes
+        createhome: true
       with_items:
         - test_usr
         - test_usr2
@@ -18,33 +18,33 @@
 
     - name: Update apt cache
       ansible.builtin.apt:
-        update_cache: yes
-      changed_when: no
+        update_cache: true
+      changed_when: false
       when: ansible_pkg_mgr == 'apt'
 
     - name: Install gnupg2 (apt)
-      become: yes
+      become: true
       ansible.builtin.apt:
         name: gnupg2
         state: present
       when: ansible_pkg_mgr == 'apt'
 
     - name: Install extension cli dependencies (zypper)
-      become: yes
+      become: true
       community.general.zypper:
         name: libX11-xcb1
         state: present
       when: ansible_pkg_mgr == 'zypper'
 
     - name: Install extension cli dependencies (apt)
-      become: yes
+      become: true
       ansible.builtin.apt:
         name: libx11-xcb1
         state: present
       when: ansible_pkg_mgr == 'apt'
 
     - name: Create settings directory
-      become: yes
+      become: true
       become_user: test_usr4
       ansible.builtin.file:
         path: /home/test_usr4/.config/Code/User
@@ -52,21 +52,21 @@
         mode: 'u=rwx,go='
 
     - name: Install default settings
-      become: yes
+      become: true
       become_user: test_usr4
       ansible.builtin.copy:
         content: '{"remove_me": true}'
         dest: /home/test_usr4/.config/Code/User/settings.json
-        force: no
+        force: false
         mode: 'u=rw,go='
 
     - name: Install default key bindings
-      become: yes
+      become: true
       become_user: test_usr4
       ansible.builtin.copy:
         content: '[{"key":"ctrl+r","command": "remove_me"}]'
         dest: /home/test_usr4/.config/Code/User/keybindings.json
-        force: no
+        force: false
         mode: 'u=rw,go='
 
   roles:
@@ -101,9 +101,9 @@
         - username: test_usr3
         - username: test_usr4
           visual_studio_code_settings: {}
-          visual_studio_code_settings_overwrite: yes
+          visual_studio_code_settings_overwrite: true
           visual_studio_code_keybindings: []
-          visual_studio_code_keybindings_overwrite: yes
+          visual_studio_code_keybindings_overwrite: true
     - role: ansible-role-visual-studio-code
       visual_studio_code_build: 'insiders'
       users:

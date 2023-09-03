@@ -60,21 +60,21 @@ visual_studio_code_build: stable
 visual_studio_code_mirror: 'https://packages.microsoft.com'
 
 # should the gpgcheck of the repo enabled?
-# if yes
+# if true
 # - for apt repo the option trusted=yes is NOT added
 # - for dnf/yum the option gpgcheck is set to yes
 # - for zypper the option gpgcheck is set to 1
-# yes is the default
-# if no
+# true is the default
+# if false
 # - for apt repo the option trusted=yes is added to repo definition
 # - for dnf/yum the option gpgcheck is set to no
 # - for zypper the option gpgcheck is set to 0
-visual_studio_code_gpgcheck: yes
+visual_studio_code_gpgcheck: true
 
 # skip task to add repo for remote package manager
-# if set to yes, the task 'install VS Code repo (apt/yum/dnf/zypper)' will be skipped
-# if set to no, the repo will be added, this is the default
-visual_studio_code_skip_add_repo: no
+# if set to true, the task 'install VS Code repo (apt/yum/dnf/zypper)' will be skipped
+# if set to false, the repo will be added, this is the default
+visual_studio_code_skip_add_repo: false
 
 # Users to install extensions for and/or write settings.json
 users: []
@@ -88,9 +88,9 @@ users:
     visual_studio_code_extensions:
       - # extension 1
       - # extension 2
-    visual_studio_code_settings_overwrite: # Overwrite the settings file if it exists. Options: boolean "yes" or "no" (defaults to "no").
+    visual_studio_code_settings_overwrite: # Overwrite the settings file if it exists. Options: boolean "true" or "false" (defaults to "false").
     visual_studio_code_settings: # JSON object
-    visual_studio_code_keybindings_overwrite: # Overwrite the keybindings file if it exists. Options: boolean "yes" or "no" (defaults to "no").
+    visual_studio_code_keybindings_overwrite: # Overwrite the keybindings file if it exists. Options: boolean "true" or "false" (defaults to "false").
     visual_studio_code_keybindings: # JSON array
 ```
 
@@ -117,7 +117,7 @@ Playbook with extensions installed that overwrites settings and keybindings:
             - streetsidesoftware.code-spell-checker
             - wholroyd.jinja
             - ms-python.python
-          visual_studio_code_settings_overwrite: yes
+          visual_studio_code_settings_overwrite: true
           visual_studio_code_settings: {
             "editor.rulers": [80, 100, 120],
             "editor.renderWhitespace": true,
@@ -125,7 +125,7 @@ Playbook with extensions installed that overwrites settings and keybindings:
               "Vagrantfile": "ruby"
             }
           }
-          visual_studio_code_keybindings_overwrite: yes
+          visual_studio_code_keybindings_overwrite: true
           visual_studio_code_keybindings: [
             {
               "key":     "ctrl+'",

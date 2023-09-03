@@ -1,6 +1,6 @@
 ---
 - name: Install dependencies (zypper)
-  become: yes
+  become: true
   community.general.zypper:
     name:
       - libdrm2
@@ -11,13 +11,13 @@
     state: present
 
 - name: Install key (zypper)
-  become: yes
+  become: true
   ansible.builtin.rpm_key:
     state: present
     key: '{{ visual_studio_code_mirror }}/keys/microsoft.asc'
 
 - name: Write repo configuration (zypper)
-  become: yes
+  become: true
   ansible.builtin.template:
     src: vscode.repo.j2
     dest: '/etc/zypp/repos.d/vscode.repo'
@@ -27,7 +27,7 @@
   when: not visual_studio_code_skip_add_repo
 
 - name: Install VS Code (zypper)
-  become: yes
+  become: true
   community.general.zypper:
     name: "{{ visual_studio_code_package }}{{ (visual_studio_code_version | length > 0) | ternary('=' + visual_studio_code_version, '') }}"
     state: present

@@ -1,6 +1,6 @@
 ---
 - name: Create config directories for users
-  become: yes
+  become: true
   become_user: '{{ user.username }}'
   ansible.builtin.file:
     path: '~{{ user.username }}/{{ visual_studio_code_config_path }}'
@@ -13,7 +13,7 @@
   when: "user.visual_studio_code_settings is defined and user.visual_studio_code_settings not in ({}, '', None, omit)"
 
 - name: Create settings directory
-  become: yes
+  become: true
   become_user: '{{ user.username }}'
   ansible.builtin.file:
     path: '~{{ user.username }}/{{ visual_studio_code_config_path }}/User'
@@ -26,7 +26,7 @@
   when: "user.visual_studio_code_settings is defined and user.visual_studio_code_settings not in ({}, '', None, omit)"
 
 - name: Write settings
-  become: yes
+  become: true
   become_user: '{{ user.username }}'
   ansible.builtin.template:
     src: settings.json.j2
@@ -43,7 +43,7 @@
     and user.visual_studio_code_settings not in ({}, '', None, omit))
 
 - name: Write keybindings
-  become: yes
+  become: true
   become_user: '{{ user.username }}'
   ansible.builtin.template:
     src: keybindings.json.j2
