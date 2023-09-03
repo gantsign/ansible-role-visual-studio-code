@@ -14,7 +14,7 @@ lint: |
   flake8
 
 platforms:
-  - name: ansible-role-visual-studio-code-ubuntu-min-trusted-yes
+  - name: ansible-role-visual-studio-code-ubuntu-min-trusted-true
     image: ubuntu:18.04
 
 provisioner:

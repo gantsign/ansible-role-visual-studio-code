@@ -1,6 +1,6 @@
 ---
 - name: Install extensions
-  become: yes
+  become: true
   become_user: '{{ item.0.username }}'
   visual_studio_code_install_extension:
     executable: '{{ visual_studio_code_exe }}'
@@ -8,6 +8,6 @@
   with_subelements:
     - '{{ users }}'
     - visual_studio_code_extensions
-    - skip_missing: yes
+    - skip_missing: true
   loop_control:
     label: '{{ item.0.username }}: {{ item.1 }}'
