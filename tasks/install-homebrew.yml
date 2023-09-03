@@ -1,3 +1,4 @@
+# code: language=ansible
 ---
 - name: Install VS Code (brew-cask)
   community.general.homebrew_cask:

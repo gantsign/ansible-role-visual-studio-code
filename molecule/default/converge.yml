@@ -1,3 +1,4 @@
+# code: language=ansible
 ---
 - name: Converge
   hosts: all
