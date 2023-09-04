@@ -22,27 +22,6 @@
       changed_when: false
       when: ansible_pkg_mgr == 'apt'
 
-    - name: Install gnupg2 (apt)
-      become: true
-      ansible.builtin.apt:
-        name: gnupg2
-        state: present
-      when: ansible_pkg_mgr == 'apt'
-
-    - name: Install extension cli dependencies (zypper)
-      become: true
-      ansible.builtin.package:
-        name: libX11-xcb1
-        state: present
-      when: ansible_pkg_mgr == 'zypper'
-
-    - name: Install extension cli dependencies (apt)
-      become: true
-      ansible.builtin.apt:
-        name: libx11-xcb1
-        state: present
-      when: ansible_pkg_mgr == 'apt'
-
   roles:
     - role: ansible-role-visual-studio-code
       users:

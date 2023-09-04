@@ -1,16 +1,5 @@
 # code: language=ansible
 ---
-- name: Install dependencies (zypper)
-  become: true
-  ansible.builtin.package:
-    name:
-      - libdrm2
-      - libgbm1
-      - libxcb-dri3-0
-      - libxshmfence1
-      - which
-    state: present
-
 - name: Install key (zypper)
   become: true
   ansible.builtin.rpm_key:
