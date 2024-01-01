@@ -9,7 +9,7 @@ role_name_check: 2
 
 platforms:
   - name: ansible-role-visual-studio-code-ubuntu-min
-    image: ubuntu:18.04
+    image: ubuntu:20.04
 
 provisioner:
   name: ansible
