@@ -27,14 +27,14 @@ jobs:
 
       - name: Tox cache
         id: tox-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/pip
           key: tox-${{ hashFiles('requirements/tox.txt') }}-py${{ steps.setup-python.outputs.python-version}}
 
       - name: Lint cache
         id: lint-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: .tox
           key: lint-${{ hashFiles('requirements/lint.txt') }}-py${{ steps.setup-python.outputs.python-version}}
@@ -95,14 +95,14 @@ jobs:
 
       - name: Tox cache
         id: tox-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.cache/pip
           key: tox-${{ hashFiles('requirements/tox.txt') }}-py${{ steps.setup-python.outputs.python-version}}
 
       - name: Molecule cache
         id: molecule-cache
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: .tox
           key: molecule-${{ hashFiles(format('requirements/ansible-{0}.txt', matrix.ansible-version)) }}-py${{ steps.setup-python.outputs.python-version}}
