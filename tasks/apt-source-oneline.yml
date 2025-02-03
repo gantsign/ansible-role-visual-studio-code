@@ -1,0 +1,29 @@
+# code: language=ansible
+---
+- name: Install dependencies (apt - oneline)
+  become: true
+  ansible.builtin.apt:
+    name:
+      - ca-certificates
+      - apt-transport-https
+    state: present
+
+- name: Install key (apt - oneline)
+  become: true
+  ansible.builtin.get_url:
+    url: '{{ visual_studio_code_mirror }}/keys/microsoft.asc'
+    dest: '/etc/apt/keyrings/'
+    mode: 'u=rw,go=r'
+    force: true
+
+- name: Install VS Code repo (apt - oneline)
+  become: true
+  ansible.builtin.apt_repository:
+    repo: >-
+      deb [arch={{ visual_studio_code_deb_architecture }}
+      {{ visual_studio_code_gpgcheck | ternary("", " trusted=true") }}
+      signed-by=/etc/apt/keyrings/microsoft.asc]
+      {{ visual_studio_code_mirror }}/repos/code stable main
+    filename: vscode
+    state: present
+  when: not visual_studio_code_skip_add_repo
