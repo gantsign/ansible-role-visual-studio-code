@@ -1,0 +1,14 @@
+# code: language=ansible
+---
+- name: Install VS Code repo (apt - deb822)
+  become: true
+  ansible.builtin.deb822_repository:
+    name: vscode
+    types: deb
+    uris: "{{ visual_studio_code_mirror }}/repos/code"
+    suites: stable
+    components: main
+    architectures: "{{ visual_studio_code_deb_architecture }}"
+    signed_by: "{{ visual_studio_code_mirror }}/keys/microsoft.asc"
+    trusted: "{{ not visual_studio_code_gpgcheck }}"
+  when: not visual_studio_code_skip_add_repo

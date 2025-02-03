@@ -27,6 +27,10 @@ visual_studio_code_mirror: 'https://packages.microsoft.com'
 # - for zypper the option gpgcheck is set to 0
 visual_studio_code_gpgcheck: true
 
+# Indicates if apt should use deb822 or one-line sources format
+# See https://repolib.readthedocs.io/en/latest/deb822-format.html
+visual_studio_code_use_deb822_format: false
+
 # skip task to add repo for remote package manager
 # if set to true, the task 'install VS Code repo (apt/yum/dnf/zypper)' will be skipped
 # if set to false, the repo will be added, this is the default
