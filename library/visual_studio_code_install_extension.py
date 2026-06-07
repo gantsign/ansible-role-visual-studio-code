@@ -43,9 +43,7 @@ def install_extension(module, executable, name):
         # found)
         rc, out, err = module.run_command(
             [executable, '--install-extension', name, '--force'])
-        # Whitelist: [DEP0005] DeprecationWarning: Buffer() is deprecated due
-        # to security and usability issues.
-        if rc != 0 or (err and '[DEP0005]' not in err):
+        if rc != 0 or (err and any(e in err for e in ['Failed Installing Extensions:', 'Error while installing extensions:'])):
             module.fail_json(
                 msg='Error while upgrading extension [%s]: (%d) %s' %
                 (name, rc, out + err))
@@ -55,9 +53,7 @@ def install_extension(module, executable, name):
     else:
         rc, out, err = module.run_command(
             [executable, '--install-extension', name])
-        # Whitelist: [DEP0005] DeprecationWarning: Buffer() is deprecated due
-        # to security and usability issues.
-        if rc != 0 or (err and '[DEP0005]' not in err):
+        if rc != 0 or (err and any(e in err for e in ['Failed Installing Extensions:', 'Error while installing extensions:'])):
             module.fail_json(
                 msg='Error while installing extension [%s]: (%d) %s' %
                 (name, rc, out + err))
